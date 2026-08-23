@@ -1,0 +1,10 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "transparent", "primaryColor": "#fffefb", "primaryTextColor": "#10161c", "primaryBorderColor": "#8a6a2f", "lineColor": "#33383d", "secondaryColor": "#f2ede3", "tertiaryColor": "#fbfaf7", "fontFamily": "Fira Sans, Inter, system-ui, sans-serif"}}}%%
+flowchart LR
+  BOILER["Nồi hơi<br/>hơi mới"]
+  DISCHARGE["Autoclave A<br/>xả áp"]
+  HEATING["Autoclave B<br/>gia nhiệt"]
+  DEOD["Bộ khử mùi<br/>trước: toàn bộ<br/>sau: < 3 bar"]
+
+  BOILER -.->|"Nguồn gốc<br/>được bù bớt"| HEATING
+  DISCHARGE ==>|"Thu hồi hơi<br/>9 -> 3 bar"| HEATING
+  DISCHARGE -->|"Phần còn lại"| DEOD
