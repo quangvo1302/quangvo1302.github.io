@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="wrap">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  {{ $all := .Pages }}
+  {{ range slice
+      (dict "key" "ci" "label" (i18n "projects_ci"))
+      (dict "key" "si" "label" (i18n "projects_si"))
+      (dict "key" "personal" "label" (i18n "projects_personal")) }}
+    <h2>{{ .label }}</h2>
+    <div class="cards">
+      {{ range sort (where $all "Params.category" .key) "Params.order" }}
+        {{ partial "project-card.html" . }}
+      {{ end }}
+    </div>
+  {{ end }}
+</div>
+{{ end }}
