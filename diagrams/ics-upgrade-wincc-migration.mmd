@@ -1,0 +1,19 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "transparent", "primaryColor": "#fffefb", "primaryTextColor": "#10161c", "primaryBorderColor": "#8a6a2f", "lineColor": "#33383d", "secondaryColor": "#f2ede3", "tertiaryColor": "#fbfaf7", "fontFamily": "Fira Sans, Inter, system-ui, sans-serif"}}}%%
+flowchart LR
+  subgraph BEFORE["Trước nâng cấp"]
+    direction TB
+    B_SCADA["Lớp giám sát<br/>WinCC V7.0"]
+    B_CONTROL["Lớp điều khiển<br/>Quantum PLC"]
+    B_SCADA --> B_CONTROL
+  end
+
+  subgraph AFTER["Sau nâng cấp"]
+    direction TB
+    A_STATIONS["Trạm vận hành<br/>chuẩn hoá"]
+    A_SCADA["Lớp giám sát<br/>WinCC V7.5 SP2"]
+    A_CONTROL["Lớp điều khiển<br/>Modicon M580"]
+    A_STATIONS --- A_SCADA
+    A_SCADA --> A_CONTROL
+  end
+
+  BEFORE -->|"1. Đổi PLC trước<br/>2. Nâng SCADA sau"| AFTER
