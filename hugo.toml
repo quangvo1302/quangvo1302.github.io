@@ -1,0 +1,23 @@
+baseURL = "https://quangvo1302.github.io/"
+title = "Võ Nhật Quang"
+defaultContentLanguage = "vi"
+defaultContentLanguageInSubdir = false
+canonifyURLs = false
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "rss"]
+
+[languages]
+  [languages.vi]
+    locale = "vi-VN"
+    label = "Tiếng Việt"
+    contentDir = "content/vi"
+    weight = 1
+
+[params]
+  description = "Võ Nhật Quang (Vo Nhat Quang) — Technical Manager tại ESEC. Tích hợp OT-IT, tự động hoá đa nền tảng Siemens, Schneider, Ignition, ETAP, OSIsoft PI."
+  email = "nhatquang1302@gmail.com"
+  linkedin = "https://www.linkedin.com/in/quangvo1302"
+  github = "https://github.com/quangvo1302"
+
+[markup.goldmark.renderer]
+  unsafe = true
