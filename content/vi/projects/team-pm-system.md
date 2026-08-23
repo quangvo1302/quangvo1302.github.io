@@ -46,10 +46,13 @@ Lập lịch theo đường găng kèm biểu đồ Gantt, bộ chỉ số theo 
 
 Phần sinh tài liệu từ biểu mẫu và các tác vụ định kỳ kèm thông báo.
 
-## Hướng đi tiếp
+## Kết quả
 
-Việc đang làm dở là kéo thêm các tác vụ phân tán khác của doanh nghiệp vào cùng hệ này, để
-đội ngũ chỉ phải mở một chỗ thay vì nhớ mỗi việc nằm ở đâu.
+Phòng kỹ thuật quản lý công việc đội nhóm và tiến độ dự án trên một nền tảng chung, thay vì
+mỗi loại việc một chỗ.
+
+Hệ vẫn đang được mở rộng. Việc đang làm là kéo thêm các tác vụ phân tán khác của doanh
+nghiệp vào cùng hệ này, để đội ngũ chỉ phải mở một chỗ thay vì nhớ mỗi việc nằm ở đâu.
 
 Đó cũng là cùng một bài toán tôi gặp ở nhà máy của khách hàng, chỉ khác chỗ đứng. Ở nhà máy
 là dữ liệu vận hành nằm rải giữa các hệ không nói chuyện được với nhau. Ở đây là công việc
