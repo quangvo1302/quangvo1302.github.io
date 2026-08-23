@@ -1,5 +1,5 @@
 %%{init: {"theme": "base", "themeVariables": {"background": "transparent", "primaryColor": "#fffefb", "primaryTextColor": "#10161c", "primaryBorderColor": "#8a6a2f", "lineColor": "#33383d", "secondaryColor": "#f2ede3", "tertiaryColor": "#fbfaf7", "fontFamily": "Fira Sans, Inter, system-ui, sans-serif"}}}%%
-flowchart LR
+flowchart TB
   subgraph BEFORE["Trước"]
     direction TB
     B_PAPER["Biểu mẫu giấy<br/>theo dõi than"]
@@ -10,7 +10,7 @@ flowchart LR
   end
 
   subgraph AFTER["Sau"]
-    direction LR
+    direction TB
     DCS["DCS"]
     MANUAL["Nhập tay"]
     COAL_APP["Ứng dụng C#<br/>quản lý than trên PI"]

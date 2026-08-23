@@ -1,9 +1,9 @@
 %%{init: {"theme": "base", "themeVariables": {"background": "transparent", "primaryColor": "#fffefb", "primaryTextColor": "#10161c", "primaryBorderColor": "#8a6a2f", "lineColor": "#33383d", "secondaryColor": "#f2ede3", "tertiaryColor": "#fbfaf7", "fontFamily": "Fira Sans, Inter, system-ui, sans-serif"}}}%%
-flowchart LR
+flowchart TB
   SENSOR["Đo độ ẩm<br/>trên băng tải"]
 
   subgraph PLC["S7-300 sẵn có"]
-    direction TB
+    direction LR
     LOGIC["Logic mới<br/>điều khiển hút"]
   end
 

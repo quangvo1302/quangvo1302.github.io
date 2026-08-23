@@ -1,5 +1,5 @@
 %%{init: {"theme": "base", "themeVariables": {"background": "transparent", "primaryColor": "#fffefb", "primaryTextColor": "#10161c", "primaryBorderColor": "#8a6a2f", "lineColor": "#33383d", "secondaryColor": "#f2ede3", "tertiaryColor": "#fbfaf7", "fontFamily": "Fira Sans, Inter, system-ui, sans-serif"}}}%%
-flowchart LR
+flowchart TB
   EQUIPMENT["Thiết bị nhà máy<br/>dữ liệu vận hành"] --> TS["TDengine<br/>dữ liệu chuỗi thời gian"]
   EQUIPMENT --> HIST["PostgreSQL<br/>lịch sử vận hành"]
   TS --> OEE["OEE theo ISA-22400<br/>sẵn sàng<br/>hiệu suất<br/>chất lượng"]

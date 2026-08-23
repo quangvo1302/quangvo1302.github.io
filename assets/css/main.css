@@ -85,6 +85,7 @@ code, .mono, .metric {
 /* Wide content scrolls inside its own box so the page body never scrolls sideways. */
 .scroll-x { overflow-x: auto; }
 .scroll-x > table { min-width: 30rem; }
+.scroll-x > svg { min-width: 28rem; }
 figure { margin-top: 1.25rem; }
 figure svg, figure img { max-width: 100%; height: auto; display: block; }
 figcaption { font-size: 0.82rem; color: var(--accent); margin-top: 0.4rem; }
