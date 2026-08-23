@@ -3,7 +3,7 @@ title = "Võ Nhật Quang"
 defaultContentLanguage = "vi"
 defaultContentLanguageInSubdir = false
 canonifyURLs = false
-enableRobotsTXT = true
+enableRobotsTXT = false
 disableKinds = ["taxonomy", "term", "rss"]
 
 [languages]
