@@ -14,12 +14,12 @@ const GUARDED = [
 // Guarded case-sensitively as a standalone token so ordinary words are not flagged.
 const GUARDED_EXACT = ["VAL"];
 
-// Fold to a comparison form: NFC-normalize, strip diacritics, lowercase,
+// Fold to a comparison form: compatibility-normalize, strip diacritics, lowercase,
 // and collapse every non-alphanumeric run to a single space. This makes
 // "Hiệp Phú", "Hiep&nbsp;Phu", "hiep-phu" and "HIEP_PHU" all compare equal.
 function fold(s) {
   return s
-    .normalize("NFD")
+    .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\u0111/g, "d")
     .replace(/\u0110/g, "D")
@@ -36,12 +36,52 @@ function decodeEntities(s) {
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)));
 }
 
+function decodeJsonUnicodeEscapes(s) {
+  return s
+    .replace(
+      /(?<!\\)\\u(d[89ab][0-9a-f]{2})(?<!\\)\\u(d[cdef][0-9a-f]{2})/gi,
+      (_, high, low) => {
+        const highCode = parseInt(high, 16);
+        const lowCode = parseInt(low, 16);
+        return String.fromCodePoint(
+          ((highCode - 0xd800) << 10) + (lowCode - 0xdc00) + 0x10000
+        );
+      }
+    )
+    .replace(/(?<!\\)\\u([0-9a-f]{4})/gi, (_, h) =>
+      String.fromCharCode(parseInt(h, 16))
+    );
+}
+
+function stripHtmlTags(s) {
+  return s.replace(/<[^>]*>/g, " ");
+}
+
+function comparisonText(raw, { stripTags = false } = {}) {
+  let text = decodeJsonUnicodeEscapes(decodeEntities(raw));
+  if (stripTags) text = stripHtmlTags(text);
+  return text;
+}
+
+function parseAttributes(tag) {
+  const attrSource = tag
+    .replace(/^<\s*\/?\s*[^\s/>]+/, "")
+    .replace(/\/?\s*>$/, "");
+  const attrs = [];
+  for (const m of attrSource.matchAll(
+    /([^\s"'<>\/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g
+  )) {
+    attrs.push({ name: m[1], value: m[2] ?? m[3] ?? m[4] ?? "" });
+  }
+  return attrs;
+}
+
 const FOLDED_GUARDED = GUARDED.map((n) => ({ name: n, folded: fold(n) }));
 
-function hits(raw) {
+function hits(raw, options) {
   if (!raw) return [];
   const found = [];
-  const text = decodeEntities(raw);
+  const text = comparisonText(raw, options);
   const folded = fold(text);
   for (const g of FOLDED_GUARDED) {
     if (folded.includes(g.folded)) found.push(g.name);
@@ -65,8 +105,9 @@ const violations = [];
 function flag(file, where, name, text) {
   violations.push({ file, where, name, text: (text || "").trim().slice(0, 120) });
 }
-function check(file, where, text) {
-  for (const name of hits(text)) flag(file, where, name, text);
+function check(file, where, text, options) {
+  const normalized = text ? comparisonText(text, options) : text;
+  for (const name of hits(text, options)) flag(file, where, name, normalized);
 }
 
 // ---- Built output ----------------------------------------------------------
@@ -92,24 +133,38 @@ for (const file of walk("public")) {
   const html = readFileSync(file, "utf8");
 
   // Rule 4: <title>
-  check(rel, "<title>", (html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1]);
+  check(rel, "<title>", (html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1], {
+    stripTags: true,
+  });
 
-  // Rule 5: every <h1>
-  for (const m of html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/gi)) check(rel, "<h1>", m[1]);
+  // Rule 5: every heading
+  for (const m of html.matchAll(/<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/gi)) {
+    check(rel, `<h${m[1]}>`, m[2], { stripTags: true });
+  }
 
   // Rule 6: every meta content attribute. Handles double, single and unquoted
   // forms, because --minify strips quotes from attribute values without spaces.
-  for (const m of html.matchAll(
-    /<meta[^>]*?content=(?:"([^"]*)"|'([^']*)'|([^\s>]+))[^>]*>/gi
-  )) {
-    check(rel, "<meta content>", m[1] ?? m[2] ?? m[3]);
+  for (const m of html.matchAll(/<meta\b[^>]*>/gi)) {
+    for (const attr of parseAttributes(m[0])) {
+      if (attr.name.toLowerCase() === "content") check(rel, "<meta content>", attr.value);
+    }
   }
 
-  // Rule 7: every JSON-LD block
+  // Rule 7: human-readable attributes and links must not carry guarded names.
+  for (const m of html.matchAll(/<\s*[a-z][^>]*>/gi)) {
+    for (const attr of parseAttributes(m[0])) {
+      const name = attr.name.toLowerCase();
+      if (name === "alt" || name === "title" || name === "aria-label" || name === "href") {
+        check(rel, `attribute ${attr.name}`, attr.value);
+      }
+    }
+  }
+
+  // Rule 8: every JSON-LD block
   for (const m of html.matchAll(
     /<script[^>]*type=["']?application\/ld\+json["']?[^>]*>([\s\S]*?)<\/script>/gi
   )) {
-    check(rel, "JSON-LD", m[1]);
+    check(rel, "JSON-LD", m[1], { stripTags: true });
   }
 }
 
