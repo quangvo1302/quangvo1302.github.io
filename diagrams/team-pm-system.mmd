@@ -1,0 +1,34 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "transparent", "primaryColor": "#fffefb", "primaryTextColor": "#10161c", "primaryBorderColor": "#8a6a2f", "lineColor": "#33383d", "secondaryColor": "#f2ede3", "tertiaryColor": "#fbfaf7", "fontFamily": "Fira Sans, Inter, system-ui, sans-serif"}}}%%
+flowchart TB
+  subgraph ONPREM["On-premise<br/>hạ tầng công ty<br/>dữ liệu nội bộ"]
+    direction TB
+
+    subgraph DOCKER["Docker"]
+      direction TB
+
+      subgraph FEATURES["Chức năng"]
+        direction LR
+        GANTT["Đường găng<br/>Gantt"]
+        METRICS["Chỉ số<br/>theo dõi"]
+        LOG["Nhật ký<br/>thay đổi"]
+        DOCS["Tài liệu<br/>theo biểu mẫu"]
+        JOBS["Lịch chạy<br/>gửi email"]
+      end
+
+      APP["Next.js<br/>nền tảng phòng kỹ thuật"]
+
+      subgraph DATA["Dữ liệu"]
+        direction TB
+        PRISMA["Prisma"]
+        DB[(PostgreSQL)]
+      end
+    end
+
+    GANTT --> APP
+    METRICS --> APP
+    LOG --> APP
+    DOCS --> APP
+    JOBS --> APP
+    APP --> PRISMA
+    PRISMA --> DB
+  end
