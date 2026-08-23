@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://quangvo1302.github.io/sitemap.xml

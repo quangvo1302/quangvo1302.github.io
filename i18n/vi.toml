@@ -1,0 +1,14 @@
+[nav_about]
+other = "Giới thiệu"
+[nav_projects]
+other = "Dự án"
+[nav_contact]
+other = "Liên hệ"
+[projects_ci]
+other = "Điều khiển & Đo lường"
+[projects_si]
+other = "Tích hợp hệ thống"
+[projects_personal]
+other = "Dự án cá nhân"
+[section_role]
+other = "Vai trò và phạm vi"
