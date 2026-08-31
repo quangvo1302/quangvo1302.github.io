@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/animation";
 import { PersonSchema } from "@/components/Schema";
 import { ProjectCard } from "@/components/ProjectCard";
 import { homePage } from "@/data/pages";
@@ -42,7 +43,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="wrap">
+      <Reveal as="section" className="wrap">
         <h2>Dự án tiêu biểu</h2>
         <div className="cards">
           {featuredProjects.map((project) => (
@@ -52,7 +53,7 @@ export default function HomePage() {
         <p>
           <Link href="/projects/">Xem toàn bộ chín dự án</Link>
         </p>
-      </section>
+      </Reveal>
     </>
   );
 }
