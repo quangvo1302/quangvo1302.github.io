@@ -7,7 +7,7 @@ description: "Liên hệ Võ Nhật Quang (Vo Nhat Quang) qua email hoặc Linke
 
 Email: [nhatquang1302@gmail.com](mailto:nhatquang1302@gmail.com)
 
-LinkedIn: [linkedin.com/in/quangvo1302](https://www.linkedin.com/in/quangvo1302)
+LinkedIn: [linkedin.com/in/nhatquang1302](https://www.linkedin.com/in/nhatquang1302)
 
 GitHub: [github.com/quangvo1302](https://github.com/quangvo1302)
 

@@ -4,7 +4,7 @@ seotitle: "Võ Nhật Quang (Vo Nhat Quang) — Tích hợp OT-IT & Tự động
 translationKey: "home"
 description: "Võ Nhật Quang (Vo Nhat Quang) — Technical Manager tại ESEC. Tích hợp OT-IT, tự động hoá đa nền tảng Siemens, Schneider, Ignition, ETAP, OSIsoft PI."
 eyebrow: "Kỹ sư trưởng · Tích hợp hệ thống"
-role: "Technical Manager · East Sea Technology Engineering"
+role: "Technical Manager · EAST SEA Energy Environment (ESEC)"
 chips:
   - "Tích hợp OT-IT"
   - "Siemens"

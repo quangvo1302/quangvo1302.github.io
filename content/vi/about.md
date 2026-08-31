@@ -6,9 +6,9 @@ description: "Võ Nhật Quang (Vo Nhat Quang), Technical Manager tại ESEC. T�
 schema: "schema-person"
 ---
 
-Tôi là Võ Nhật Quang, viết không dấu là Vo Nhat Quang. Hiện làm Technical Manager tại East
-Sea Technology Engineering, một đơn vị tích hợp hệ thống tự động hoá công nghiệp tại TP. Hồ
-Chí Minh.
+Tôi là Võ Nhật Quang, viết không dấu là Vo Nhat Quang. Hiện làm Technical Manager tại EAST
+SEA Energy Environment (ESEC), một đơn vị tích hợp hệ thống tự động hoá công nghiệp tại TP.
+Hồ Chí Minh.
 
 ## Kinh nghiệm
 
@@ -73,5 +73,5 @@ tôi triển khai cho khách hàng.
 ## Liên hệ
 
 Email: [nhatquang1302@gmail.com](mailto:nhatquang1302@gmail.com). Hồ sơ nghề nghiệp trên
-[LinkedIn](https://www.linkedin.com/in/quangvo1302) và mã nguồn trên
+[LinkedIn](https://www.linkedin.com/in/nhatquang1302) và mã nguồn trên
 [GitHub](https://github.com/quangvo1302).
