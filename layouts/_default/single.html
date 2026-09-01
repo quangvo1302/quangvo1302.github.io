@@ -1,7 +1,0 @@
-{{ define "schema" }}{{ with .Params.schema }}{{ partial (printf "%s.html" .) $ }}{{ end }}{{ end }}
-{{ define "main" }}
-<article class="wrap">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-</article>
-{{ end }}
