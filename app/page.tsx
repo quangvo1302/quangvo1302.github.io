@@ -24,9 +24,7 @@ export default function HomePage() {
       <section className="hero">
         <div className="wrap">
           <p className="eyebrow">{homePage.eyebrow}</p>
-          <h1>
-            {homePage.title} <span className="mono">(Vo Nhat Quang)</span>
-          </h1>
+          <h1>{homePage.title}</h1>
           <p>
             <strong>{homePage.role}</strong>
           </p>

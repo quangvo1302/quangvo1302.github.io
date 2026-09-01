@@ -3,7 +3,7 @@ export const siteConfig = {
   alternateName: ["Vo Nhat Quang", "Quang Vo", "quangvo1302"],
   baseUrl: "https://quangvo1302.github.io",
   description:
-    "Võ Nhật Quang (Vo Nhat Quang) — Technical Manager tại ESEC. Tích hợp OT-IT, tự động hoá đa nền tảng Siemens, Schneider, Ignition, ETAP, OSIsoft PI.",
+    "Võ Nhật Quang — Technical Manager tại ESEC. Tích hợp OT-IT, tự động hoá đa nền tảng Siemens, Schneider, Ignition, ETAP, OSIsoft PI.",
   email: "nhatquang1302@gmail.com",
   linkedin: "https://www.linkedin.com/in/nhatquang1302",
   github: "https://github.com/quangvo1302",

@@ -3,9 +3,9 @@ import type { ContentSection, StaticPage } from "./types";
 export const homePage = {
   title: "Võ Nhật Quang",
   seoTitle:
-    "Võ Nhật Quang (Vo Nhat Quang) — Tích hợp OT-IT & Tự động hoá công nghiệp",
+    "Võ Nhật Quang — Tích hợp OT-IT & Tự động hoá công nghiệp",
   description:
-    "Võ Nhật Quang (Vo Nhat Quang) — Technical Manager tại ESEC. Tích hợp OT-IT, tự động hoá đa nền tảng Siemens, Schneider, Ignition, ETAP, OSIsoft PI.",
+    "Võ Nhật Quang — Technical Manager tại ESEC. Tích hợp OT-IT, tự động hoá đa nền tảng Siemens, Schneider, Ignition, ETAP, OSIsoft PI.",
   path: "/",
   eyebrow: "Kỹ sư trưởng · Tích hợp hệ thống",
   role: "Technical Manager · EAST SEA Energy Environment (ESEC)",
@@ -35,9 +35,9 @@ export const aboutPage: StaticPage & {
 } = {
   title: "Giới thiệu",
   seoTitle:
-    "Võ Nhật Quang (Vo Nhat Quang) — Technical Manager, tự động hoá công nghiệp",
+    "Võ Nhật Quang — Technical Manager, tự động hoá công nghiệp",
   description:
-    "Võ Nhật Quang (Vo Nhat Quang), Technical Manager tại ESEC. Tám năm tự động hoá công nghiệp, quản lý bốn đội kỹ thuật.",
+    "Võ Nhật Quang, Technical Manager tại ESEC. Tám năm tự động hoá công nghiệp, quản lý bốn đội kỹ thuật.",
   path: "/about/",
   intro:
     "Tôi là Võ Nhật Quang, viết không dấu là Vo Nhat Quang. Hiện làm Technical Manager tại EAST SEA Energy Environment (ESEC), một đơn vị tích hợp hệ thống tự động hoá công nghiệp tại TP. Hồ Chí Minh.",
@@ -79,8 +79,8 @@ export const aboutPage: StaticPage & {
 
 export const contactPage: StaticPage = {
   title: "Liên hệ",
-  seoTitle: "Liên hệ Võ Nhật Quang (Vo Nhat Quang) — kỹ sư tự động hoá",
-  description: "Liên hệ Võ Nhật Quang (Vo Nhat Quang) qua email hoặc LinkedIn.",
+  seoTitle: "Liên hệ Võ Nhật Quang — kỹ sư tự động hoá",
+  description: "Liên hệ Võ Nhật Quang qua email hoặc LinkedIn.",
   path: "/contact/"
 };
 
@@ -88,7 +88,7 @@ export const projectsIndexPage: StaticPage & { intro: string } = {
   title: "Dự án",
   seoTitle: "Dự án tự động hoá và tích hợp hệ thống — Võ Nhật Quang",
   description:
-    "Chín dự án tự động hoá và tích hợp hệ thống của Võ Nhật Quang (Vo Nhat Quang), chia theo Điều khiển & Đo lường, Tích hợp hệ thống, và dự án cá nhân.",
+    "Chín dự án tự động hoá và tích hợp hệ thống của Võ Nhật Quang, chia theo Điều khiển & Đo lường, Tích hợp hệ thống, và dự án cá nhân.",
   path: "/projects/",
   intro:
     "Chín dự án, nhóm theo năng lực chứ không theo thời gian. Mỗi dự án có một trang riêng trình bày theo cùng một bố cục: vai trò và phạm vi, bài toán, cách tiếp cận, bàn giao, kết quả. Dòng thời gian sự nghiệp nằm ở trang Giới thiệu."
