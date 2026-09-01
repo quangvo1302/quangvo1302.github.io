@@ -9,10 +9,10 @@ export function SiteHeader() {
           Võ Nhật Quang
         </Link>
         <nav>
-          <Link href="/about/">Giới thiệu</Link>
-          <Link href="/projects/">Dự án</Link>
-          <Link href="/posts/">Bài viết</Link>
-          <Link href="/contact/">Liên hệ</Link>
+          <Link href="/about/" prefetch={false}>Giới thiệu</Link>
+          <Link href="/projects/" prefetch={false}>Dự án</Link>
+          <Link href="/posts/" prefetch={false}>Bài viết</Link>
+          <Link href="/contact/" prefetch={false}>Liên hệ</Link>
         </nav>
         <ThemeToggle />
       </div>

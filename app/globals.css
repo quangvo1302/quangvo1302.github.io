@@ -8,8 +8,8 @@
   --rule-strong: #16202b;
   --accent: #8a6a2f;
   --positive: #1f6f43;
-  --sans: 'Fira Sans', 'Inter', system-ui, sans-serif;
-  --mono: 'Fira Code', 'JetBrains Mono', monospace;
+  --sans: var(--font-sans), 'Inter', system-ui, sans-serif;
+  --mono: var(--font-mono), 'JetBrains Mono', monospace;
 }
 
 @media (prefers-color-scheme: dark) {

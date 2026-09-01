@@ -12,6 +12,7 @@ export function TaxonomyNav({
       <Link
         href="/posts/"
         className={`taxonomy-nav-item${active === "all" ? " is-active" : ""}`}
+        prefetch={false}
       >
         Tất cả bài viết
       </Link>
@@ -20,6 +21,7 @@ export function TaxonomyNav({
           key={taxonomy}
           href={taxonomyConfigs[taxonomy].path}
           className={`taxonomy-nav-item${active === taxonomy ? " is-active" : ""}`}
+          prefetch={false}
         >
           {taxonomyConfigs[taxonomy].navLabel}
         </Link>
