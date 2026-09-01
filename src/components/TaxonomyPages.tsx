@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/animation";
 import { taxonomyConfigs } from "@/data/labels";
 import {
   getPostsByTaxonomy,
@@ -51,7 +52,7 @@ export function TaxonomyOverviewPage({ taxonomy }: { taxonomy: PostTaxonomy }) {
 
       <TaxonomyNav active={taxonomy} />
 
-      <div className="term-grid">
+      <Reveal className="term-grid">
         {terms.map((term) => (
           <div className="term-card" key={term.term}>
             <div className="term-card-header">
@@ -78,7 +79,7 @@ export function TaxonomyOverviewPage({ taxonomy }: { taxonomy: PostTaxonomy }) {
             </div>
           </div>
         ))}
-      </div>
+      </Reveal>
     </div>
   );
 }
@@ -120,11 +121,11 @@ export function TaxonomyTermPage({
         </p>
       </header>
 
-      <div className="post-cards-list">
+      <Reveal className="post-cards-list">
         {posts.map((post) => (
           <PostCard post={post} key={post.slug} />
         ))}
-      </div>
+      </Reveal>
 
       <p className="back-link-wrapper">
         <Link className="back-link" href={config.path}>

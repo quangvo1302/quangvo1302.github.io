@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Reveal } from "@/components/animation";
 import { getTermLabel } from "@/data/labels";
 import {
   getPost,
@@ -144,7 +145,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
       </section>
 
-      <nav className="post-wayfinding" aria-label="Điều hướng liên quan">
+      <Reveal as="nav" className="post-wayfinding" ariaLabel="Điều hướng liên quan">
         {relatedSeriesPosts.length > 0 ? (
           <div className="wayfinding-card wayfinding--series">
             <h4>Cùng chuyên đề: {post.seriesTitle}</h4>
@@ -175,7 +176,7 @@ export default async function PostPage({ params }: PostPageProps) {
             </Link>
           </p>
         </div>
-      </nav>
+      </Reveal>
 
       <div className="post-back-bar">
         <Link className="back-link" href="/posts/">

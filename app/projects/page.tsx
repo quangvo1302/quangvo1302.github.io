@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/animation";
 import { ProjectCard } from "@/components/ProjectCard";
 import { projectsIndexPage } from "@/data/pages";
 import { getProjectsByCategory, projectCategorySections } from "@/data/projects";
@@ -21,15 +22,15 @@ export default function ProjectsPage() {
         <Link href="/about/">Giới thiệu</Link>.
       </p>
 
-      {projectCategorySections.map((section) => (
-        <section key={section.key}>
+      {projectCategorySections.map((section, index) => (
+        <Reveal as="section" delay={index * 0.08} key={section.key}>
           <h2>{section.label}</h2>
           <div className="cards">
             {getProjectsByCategory(section.key).map((project) => (
               <ProjectCard project={project} key={project.slug} />
             ))}
           </div>
-        </section>
+        </Reveal>
       ))}
     </div>
   );

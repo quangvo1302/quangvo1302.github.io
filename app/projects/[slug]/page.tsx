@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Reveal } from "@/components/animation";
 import { DiagramFigure } from "@/components/DiagramFigure";
 import { ArticleSchema } from "@/components/Schema";
 import { SectionContent } from "@/components/SectionContent";
@@ -74,8 +75,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </table>
       </div>
 
-      <SectionContent sections={project.sections} />
-      <DiagramFigure fileName={project.diagram} />
+      <SectionContent sections={project.sections} animate />
+      <Reveal delay={project.sections.length * 0.08 + 0.15}>
+        <DiagramFigure fileName={project.diagram} />
+      </Reveal>
     </article>
   );
 }

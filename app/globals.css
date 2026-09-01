@@ -46,6 +46,14 @@
 
 html { font-size: 14px; }
 
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 body {
   font-family: var(--sans);
   font-weight: 400;
@@ -172,6 +180,17 @@ figcaption { font-size: 0.82rem; color: var(--accent); margin-top: 0.4rem; }
 }
 .diagram-light-island figcaption {
   color: #1664a6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .diagram-light-island {
+    border-color: #3d4d5e;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  }
+}
+:root[data-theme="dark"] .diagram-light-island {
+  border-color: #3d4d5e;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
 }
 
 .site-footer {

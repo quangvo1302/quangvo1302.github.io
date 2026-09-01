@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/animation";
 import { PostCard } from "@/components/PostCard";
 import { TaxonomyNav } from "@/components/TaxonomyNav";
 import { postsIndexPage } from "@/data/pages";
@@ -26,13 +27,13 @@ export default function PostsPage() {
 
       <TaxonomyNav active="all" />
 
-      <div className="post-cards-list">
+      <Reveal className="post-cards-list">
         {posts.map((post) => (
           <PostCard post={post} key={post.slug} />
         ))}
-      </div>
+      </Reveal>
 
-      <div className="post-list-footer-box">
+      <Reveal className="post-list-footer-box" delay={0.1}>
         <div className="footer-box-col">
           <h3>Khám phá theo danh mục</h3>
           <ul className="taxonomy-quick-links">
@@ -70,7 +71,7 @@ export default function PostsPage() {
             </Link>
           </p>
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }
