@@ -1,22 +1,21 @@
 // Fails the build if a guarded client name appears anywhere it must not.
-// Client names are permitted in rendered body text only. See spec section 9.
-import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
-import { join, relative, basename } from "node:path";
+// Client names are permitted in rendered body text only.
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { basename, join, relative } from "node:path";
+import ts from "typescript-compiler-api";
+
+const SOURCE_ONLY = process.argv.includes("--source-only");
 
 const GUARDED = [
   "Hiep Phu", "Hiệp Phú",
   "Vietnam Agribusiness",
   "Nam Duong", "Nam Dương",
   "EVNGenco", "EVN Genco",
-  "Tra Vinh", "Trà Vinh",
+  "Tra Vinh", "Trà Vinh"
 ];
 
-// Guarded case-sensitively as a standalone token so ordinary words are not flagged.
 const GUARDED_EXACT = ["VAL"];
 
-// Fold to a comparison form: compatibility-normalize, strip diacritics, lowercase,
-// and collapse every non-alphanumeric run to a single space. This makes
-// "Hiệp Phú", "Hiep&nbsp;Phu", "hiep-phu" and "HIEP_PHU" all compare equal.
 function fold(s) {
   return s
     .normalize("NFKD")
@@ -102,88 +101,136 @@ function* walk(dir) {
 }
 
 const violations = [];
+
 function flag(file, where, name, text) {
   violations.push({ file, where, name, text: (text || "").trim().slice(0, 120) });
 }
+
 function check(file, where, text, options) {
   const normalized = text ? comparisonText(text, options) : text;
   for (const name of hits(text, options)) flag(file, where, name, normalized);
 }
 
-// ---- Built output ----------------------------------------------------------
-for (const file of walk("public")) {
-  const rel = relative("public", file);
-
-  // Rule 1: no guarded name in any output path. Catches slugs and image names.
-  for (const name of hits(rel)) flag(rel, "output path", name, rel);
-
-  // Rule 2: no guarded name anywhere inside a diagram.
-  if (file.endsWith(".svg")) {
-    check(rel, "svg content", readFileSync(file, "utf8"));
-    continue;
+function propertyNameText(name) {
+  if (ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name)) {
+    return name.text;
   }
+  return name.getText();
+}
 
-  // Rule 3: sitemap and any other XML must be clean, since URLs appear there.
-  if (file.endsWith(".xml")) {
-    check(rel, "xml content", readFileSync(file, "utf8"));
-    continue;
-  }
+function isBodyTextPath(path) {
+  return path.includes("paragraphs") ||
+    path.includes("sourceNote") ||
+    path.includes("integratorView") ||
+    path.includes("intro");
+}
 
-  if (!file.endsWith(".html")) continue;
-  const html = readFileSync(file, "utf8");
+function scanTypeScriptData(file) {
+  const source = readFileSync(file, "utf8");
+  const sourceFile = ts.createSourceFile(
+    file,
+    source,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS
+  );
 
-  // Rule 4: <title>
-  check(rel, "<title>", (html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1], {
-    stripTags: true,
-  });
-
-  // Rule 5: every heading
-  for (const m of html.matchAll(/<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/gi)) {
-    check(rel, `<h${m[1]}>`, m[2], { stripTags: true });
-  }
-
-  // Rule 6: every meta content attribute. Handles double, single and unquoted
-  // forms, because --minify strips quotes from attribute values without spaces.
-  for (const m of html.matchAll(/<meta\b[^>]*>/gi)) {
-    for (const attr of parseAttributes(m[0])) {
-      if (attr.name.toLowerCase() === "content") check(rel, "<meta content>", attr.value);
+  function visit(node, path = []) {
+    if (ts.isPropertyAssignment(node)) {
+      visit(node.initializer, [...path, propertyNameText(node.name)]);
+      return;
     }
-  }
 
-  // Rule 7: human-readable attributes and links must not carry guarded names.
-  for (const m of html.matchAll(/<\s*[a-z][^>]*>/gi)) {
-    for (const attr of parseAttributes(m[0])) {
-      const name = attr.name.toLowerCase();
-      if (name === "alt" || name === "title" || name === "aria-label" || name === "href") {
-        check(rel, `attribute ${attr.name}`, attr.value);
+    if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
+      if (!isBodyTextPath(path)) {
+        check(file, `source data ${path.join(".") || "(top-level string)"}`, node.text);
       }
     }
+
+    ts.forEachChild(node, (child) => visit(child, path));
   }
 
-  // Rule 8: every JSON-LD block
-  for (const m of html.matchAll(
-    /<script[^>]*type=["']?application\/ld\+json["']?[^>]*>([\s\S]*?)<\/script>/gi
-  )) {
-    check(rel, "JSON-LD", m[1], { stripTags: true });
+  visit(sourceFile);
+}
+
+function scanSourceData() {
+  for (const file of walk("src/data")) {
+    for (const name of hits(basename(file))) flag(file, "source filename", name, file);
+    if (file.endsWith(".ts")) scanTypeScriptData(file);
+  }
+
+  for (const file of walk("public")) {
+    const rel = relative("public", file);
+    for (const name of hits(rel)) flag(rel, "public path", name, rel);
+    if (file.endsWith(".svg")) check(rel, "svg content", readFileSync(file, "utf8"));
+    if (file.endsWith(".xml")) check(rel, "xml source", readFileSync(file, "utf8"));
   }
 }
 
-// ---- Sources ---------------------------------------------------------------
-// A violating filename or diagram label is easier to fix before it is rendered.
-for (const file of walk("content")) {
-  for (const name of hits(basename(file))) flag(file, "source filename", name, file);
+function scanBuiltOutput() {
+  if (!existsSync("out")) {
+    console.error("Containment check FAILED: missing out/. Run npm run build first.");
+    process.exit(1);
+  }
+
+  for (const file of walk("out")) {
+    const rel = relative("out", file);
+
+    for (const name of hits(rel)) flag(rel, "output path", name, rel);
+
+    if (file.endsWith(".svg")) {
+      check(rel, "svg content", readFileSync(file, "utf8"));
+      continue;
+    }
+
+    if (file.endsWith(".xml")) {
+      check(rel, "xml content", readFileSync(file, "utf8"));
+      continue;
+    }
+
+    if (!file.endsWith(".html")) continue;
+    const html = readFileSync(file, "utf8");
+
+    check(rel, "<title>", (html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1], {
+      stripTags: true
+    });
+
+    for (const m of html.matchAll(/<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/gi)) {
+      check(rel, `<h${m[1]}>`, m[2], { stripTags: true });
+    }
+
+    for (const m of html.matchAll(/<meta\b[^>]*>/gi)) {
+      for (const attr of parseAttributes(m[0])) {
+        if (attr.name.toLowerCase() === "content") check(rel, "<meta content>", attr.value);
+      }
+    }
+
+    for (const m of html.matchAll(/<\s*[a-z][^>]*>/gi)) {
+      for (const attr of parseAttributes(m[0])) {
+        const name = attr.name.toLowerCase();
+        if (name === "alt" || name === "title" || name === "aria-label" || name === "href") {
+          check(rel, `attribute ${attr.name}`, attr.value);
+        }
+      }
+    }
+
+    for (const m of html.matchAll(
+      /<script[^>]*type=["']?application\/ld\+json["']?[^>]*>([\s\S]*?)<\/script>/gi
+    )) {
+      check(rel, "JSON-LD", m[1], { stripTags: true });
+    }
+  }
 }
-for (const file of walk("diagrams")) {
-  for (const name of hits(basename(file))) flag(file, "diagram filename", name, file);
-  if (file.endsWith(".mmd")) check(file, "mermaid source", readFileSync(file, "utf8"));
-}
+
+scanSourceData();
+if (!SOURCE_ONLY) scanBuiltOutput();
 
 if (violations.length) {
   console.error(`Containment check FAILED with ${violations.length} violation(s):\n`);
   for (const v of violations) {
     console.error(`  ${v.file}\n    ${v.where}: found "${v.name}"\n    in: ${v.text}\n`);
   }
-  console.error("Client names are permitted in rendered body text only. See spec section 9.");
+  console.error("Client names are permitted in rendered body text only.");
   process.exit(1);
 }
 
