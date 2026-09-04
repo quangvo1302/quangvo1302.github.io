@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Võ Nhật Quang",
   alternateName: ["Vo Nhat Quang", "Quang Vo", "quangvo1302"],
-  baseUrl: "https://quangvo1302.github.io",
+  baseUrl: "https://vonhatquang.site",
   description:
     "Võ Nhật Quang — Technical Manager tại ESEC. Tích hợp OT-IT, tự động hoá đa nền tảng Siemens, Schneider, Ignition, ETAP, OSIsoft PI.",
   email: "nhatquang1302@gmail.com",
@@ -24,7 +24,7 @@ export const siteConfig = {
     "OT-IT integration",
     "Overall Equipment Effectiveness"
   ],
-  personId: "https://quangvo1302.github.io/about/#person"
+  personId: "https://vonhatquang.site/about/#person"
 } as const;
 
 export function absoluteUrl(path: string): string {

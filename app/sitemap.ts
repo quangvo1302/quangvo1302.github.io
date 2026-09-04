@@ -2,8 +2,9 @@ import type { MetadataRoute } from "next";
 import { taxonomyConfigs, taxonomyOrder } from "@/data/labels";
 import { getPostsNewestFirst, getTermsForTaxonomy } from "@/data/posts";
 import { projects } from "@/data/projects";
+import { siteConfig } from "@/data/site";
 
-const baseUrl = "https://quangvo1302.github.io";
+const baseUrl = siteConfig.baseUrl;
 
 export const dynamic = "force-static";
 
