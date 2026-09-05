@@ -15,7 +15,7 @@ const motionElements = {
 export function Reveal({
   as = "div",
   delay = 0,
-  y = 16,
+  y = 22,
   className,
   ariaLabel,
   children
@@ -35,8 +35,8 @@ export function Reveal({
       aria-label={ariaLabel}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: 0.45, ease: "easeOut", delay }}
+      viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </Component>
