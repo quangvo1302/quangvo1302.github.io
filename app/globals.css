@@ -11,7 +11,7 @@
   --card-hover-border: color-mix(in srgb, var(--accent) 45%, var(--rule));
   --card-hover-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
   --sans: var(--font-sans), 'Inter', system-ui, sans-serif;
-  --mono: var(--font-mono), 'JetBrains Mono', monospace;
+  --mono: var(--font-mono), monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -494,7 +494,7 @@ figcaption { font-size: 0.82rem; color: var(--accent); margin-top: 0.4rem; }
   gap: 0.35rem;
 }
 .chip-item {
-  font-family: var(--sans);
+  font-family: var(--mono);
   font-size: 0.72rem;
   padding: 0.15rem 0.5rem;
   border: 1px solid var(--rule);

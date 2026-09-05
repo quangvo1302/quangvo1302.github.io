@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Code, Fira_Sans } from "next/font/google";
+import { Fira_Sans, JetBrains_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ThemeScript } from "@/components/ThemeScript";
@@ -14,8 +14,8 @@ const firaSans = Fira_Sans({
   display: "swap"
 });
 
-const firaCode = Fira_Code({
-  subsets: ["latin"],
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin", "vietnamese"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-mono",
   display: "swap"
@@ -36,7 +36,7 @@ export default function RootLayout({
     <html
       lang="vi"
       suppressHydrationWarning
-      className={`${firaSans.variable} ${firaCode.variable}`}
+      className={`${firaSans.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <ThemeScript />
