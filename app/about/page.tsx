@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/animation";
+import { Reveal, SignatureTrace } from "@/components/animation";
 import { PersonSchema } from "@/components/Schema";
 import { SectionContent } from "@/components/SectionContent";
 import { aboutPage } from "@/data/pages";
@@ -15,8 +15,11 @@ export default function AboutPage() {
   return (
     <article className="wrap">
       <PersonSchema pagePath="/about/" />
-      <h1>{aboutPage.title}</h1>
-      <p>{aboutPage.intro}</p>
+      <header className="page-hero">
+        <h1>{aboutPage.title}</h1>
+        <SignatureTrace variant="pulse" />
+        <p>{aboutPage.intro}</p>
+      </header>
       <SectionContent sections={aboutPage.sections} animate />
 
       <Reveal as="section" delay={aboutPage.sections.length * 0.08}>

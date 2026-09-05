@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Reveal } from "@/components/animation";
+import { Reveal, SignatureTrace } from "@/components/animation";
 import { PersonSchema } from "@/components/Schema";
 import { ProjectCard } from "@/components/ProjectCard";
 import { homePage } from "@/data/pages";
@@ -25,6 +25,7 @@ export default function HomePage() {
         <div className="wrap">
           <p className="eyebrow">{homePage.eyebrow}</p>
           <h1>{homePage.title}</h1>
+          <SignatureTrace variant="flow" />
           <p>
             <strong>{homePage.role}</strong>
           </p>

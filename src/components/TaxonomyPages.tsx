@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Reveal } from "@/components/animation";
+import { Reveal, SignatureTrace } from "@/components/animation";
 import { taxonomyConfigs } from "@/data/labels";
 import {
   getPostsByTaxonomy,
@@ -44,9 +44,10 @@ export function TaxonomyOverviewPage({ taxonomy }: { taxonomy: PostTaxonomy }) {
         <span className="current">{config.label}</span>
       </nav>
 
-      <header className="taxonomy-header">
+      <header className="page-hero taxonomy-header">
         <p className="eyebrow">{config.overviewEyebrow}</p>
         <h1>{config.overviewHeading}</h1>
+        <SignatureTrace variant="branch" />
         <p className="taxonomy-desc">{config.overviewDescription}</p>
       </header>
 
@@ -110,9 +111,10 @@ export function TaxonomyTermPage({
         <span className="current">{termData.label}</span>
       </nav>
 
-      <header className="term-header">
+      <header className="page-hero term-header">
         <p className="eyebrow">{config.termEyebrow}</p>
         <h1>{termData.label}</h1>
+        <SignatureTrace variant="branch" />
         <p className="term-header-meta">
           {taxonomy === "industries"
             ? `${config.termMetaPrefix} ${termData.label}`

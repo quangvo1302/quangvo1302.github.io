@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Reveal } from "@/components/animation";
+import { Reveal, SignatureTrace } from "@/components/animation";
 import { PostCard } from "@/components/PostCard";
 import { TaxonomyNav } from "@/components/TaxonomyNav";
 import { postsIndexPage } from "@/data/pages";
@@ -17,9 +17,10 @@ export default function PostsPage() {
 
   return (
     <div className="wrap">
-      <header className="taxonomy-header">
+      <header className="page-hero taxonomy-header">
         <p className="eyebrow">GHI CHÉP & CASE STUDY</p>
         <h1>{postsIndexPage.title}</h1>
+        <SignatureTrace variant="branch" />
         <div className="taxonomy-desc">
           <p>{postsIndexPage.intro}</p>
         </div>

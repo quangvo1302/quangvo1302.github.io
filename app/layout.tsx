@@ -3,6 +3,7 @@ import { Fira_Code, Fira_Sans } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ThemeScript } from "@/components/ThemeScript";
+import { MotionProvider } from "@/components/animation";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
 
@@ -42,7 +43,9 @@ export default function RootLayout({
       </head>
       <body>
         <SiteHeader />
-        <main>{children}</main>
+        <main>
+          <MotionProvider>{children}</MotionProvider>
+        </main>
         <SiteFooter />
       </body>
     </html>

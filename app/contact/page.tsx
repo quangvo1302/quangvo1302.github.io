@@ -1,3 +1,4 @@
+import { SignatureTrace } from "@/components/animation";
 import { contactPage } from "@/data/pages";
 import { siteConfig } from "@/data/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -11,7 +12,10 @@ export const metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <article className="wrap">
-      <h1>{contactPage.title}</h1>
+      <header className="page-hero">
+        <h1>{contactPage.title}</h1>
+        <SignatureTrace variant="minimal" />
+      </header>
       <p>
         Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
       </p>

@@ -1,15 +1,15 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 
 type RevealElement = "div" | "section" | "article" | "nav";
 
 const motionElements = {
-  div: motion.div,
-  section: motion.section,
-  article: motion.article,
-  nav: motion.nav
+  div: m.div,
+  section: m.section,
+  article: m.article,
+  nav: m.nav
 };
 
 export function Reveal({

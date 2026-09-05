@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Reveal } from "@/components/animation";
+import { Reveal, SignatureTrace } from "@/components/animation";
 import { getTermLabel } from "@/data/labels";
 import {
   getPost,
@@ -76,7 +76,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <span className="current">{post.title}</span>
       </nav>
 
-      <header className="post-header">
+      <header className="page-hero post-header">
         <div className="post-header-meta">
           <time className="post-publish-date" dateTime={dateTimeAttribute(post.publishDate)}>
             {formatVietnameseDate(post.publishDate)}
@@ -86,6 +86,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </span>
         </div>
         <h1 className="post-single-title">{post.title}</h1>
+        <SignatureTrace variant="branch" />
         <p className="post-single-lead">{post.summary}</p>
       </header>
 
