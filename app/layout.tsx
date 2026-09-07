@@ -40,6 +40,15 @@ export default function RootLayout({
     >
       <head>
         <ThemeScript />
+        <noscript>
+          <style>{`
+            .page-transition-shell,
+            .reveal {
+              opacity: 1 !important;
+              transform: none !important;
+            }
+          `}</style>
+        </noscript>
       </head>
       <body>
         <SiteHeader />

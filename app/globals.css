@@ -197,6 +197,14 @@ code, .mono, .metric {
 .site-header .brand { font-weight: 700; color: var(--heading); text-decoration: none; margin-right: auto; }
 .site-header nav { display: flex; flex-wrap: wrap; align-items: center; gap: 1.1rem; }
 .site-header nav a { color: var(--text); text-decoration: none; font-size: 0.9rem; }
+.site-header nav a[aria-current="page"] {
+  color: var(--heading);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
 .theme-toggle {
   font-family: var(--mono);
   font-size: 0.74rem;
