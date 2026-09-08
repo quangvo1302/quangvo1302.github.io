@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Reveal, SignatureTrace } from "@/components/animation";
+import { Reveal } from "@/components/animation";
 import { ProjectCard } from "@/components/ProjectCard";
 import { projectsIndexPage } from "@/data/pages";
 import { getProjectsByCategory, projectCategorySections } from "@/data/projects";
@@ -16,7 +16,6 @@ export default function ProjectsPage() {
     <div className="wrap">
       <header className="page-hero">
         <h1>{projectsIndexPage.title}</h1>
-        <SignatureTrace variant="converge" />
         <p>
           Chín dự án, nhóm theo năng lực chứ không theo thời gian. Mỗi dự án có một
           trang riêng trình bày theo cùng một bố cục: vai trò và phạm vi, bài toán,

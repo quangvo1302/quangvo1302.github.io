@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Reveal, SignatureTrace } from "@/components/animation";
+import { Reveal } from "@/components/animation";
 import { getTermLabel } from "@/data/labels";
 import {
   getPost,
@@ -86,7 +86,6 @@ export default async function PostPage({ params }: PostPageProps) {
           </span>
         </div>
         <h1 className="post-single-title">{post.title}</h1>
-        <SignatureTrace variant="branch" />
         <p className="post-single-lead">{post.summary}</p>
       </header>
 

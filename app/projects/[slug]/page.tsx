@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Reveal, SignatureTrace } from "@/components/animation";
+import { Reveal } from "@/components/animation";
 import { DiagramFigure } from "@/components/DiagramFigure";
 import { ArticleSchema } from "@/components/Schema";
 import { SectionContent } from "@/components/SectionContent";
@@ -51,7 +51,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <header className="page-hero">
         <p className="eyebrow">{project.descriptor}</p>
         <h1>{project.title}</h1>
-        <SignatureTrace variant="node" />
       </header>
 
       <h2>Vai trò và phạm vi</h2>
