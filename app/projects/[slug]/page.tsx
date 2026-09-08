@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </tr>
             <tr>
               <th>Nền tảng kỹ thuật</th>
-              <td className="mono">{project.stack.join(" · ")}</td>
+              <td>{project.stack.join(" · ")}</td>
             </tr>
           </tbody>
         </table>

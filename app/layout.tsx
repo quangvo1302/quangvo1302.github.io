@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Sans, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ThemeScript } from "@/components/ThemeScript";
@@ -7,17 +7,17 @@ import { MotionProvider } from "@/components/animation";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
 
-const firaSans = Fira_Sans({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin", "vietnamese"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap"
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-mono",
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
   display: "swap"
 });
 
@@ -36,7 +36,7 @@ export default function RootLayout({
     <html
       lang="vi"
       suppressHydrationWarning
-      className={`${firaSans.variable} ${jetbrainsMono.variable}`}
+      className={`${plexSans.variable} ${spaceGrotesk.variable}`}
     >
       <head>
         <ThemeScript />
