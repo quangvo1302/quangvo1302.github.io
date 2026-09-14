@@ -1100,3 +1100,60 @@ figcaption { font-size: 0.82rem; color: var(--accent); margin-top: 0.4rem; }
 .filter-empty-state .filter-clear {
   margin-left: 0.35rem;
 }
+
+.profile-photo {
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+
+.hero-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .hero-identity {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+.hero-identity-text {
+  min-width: 0;
+}
+
+.hero-capability-link {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.hero-capability-link a {
+  color: var(--accent);
+}
+
+.profile-photo--about {
+  margin-bottom: 0.75rem;
+}
+
+.capability-summary {
+  margin-top: 1.5rem;
+}
+
+.capability-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.capability-list li + li {
+  margin-top: 0.3rem;
+}

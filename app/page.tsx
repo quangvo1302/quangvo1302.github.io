@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Reveal, SignatureTrace } from "@/components/animation";
 import { PersonSchema } from "@/components/Schema";
+import { ProfilePhoto } from "@/components/ProfilePhoto";
 import { ProjectCard } from "@/components/ProjectCard";
 import { homePage } from "@/data/pages";
 import { featuredProjectSlugs, getProject } from "@/data/projects";
@@ -23,9 +24,14 @@ export default function HomePage() {
       <PersonSchema pagePath="/" />
       <section className="hero">
         <div className="wrap">
-          <p className="eyebrow">{homePage.eyebrow}</p>
-          <h1>{homePage.title}</h1>
-          <SignatureTrace variant="flow" />
+          <div className="hero-identity">
+            <ProfilePhoto size={112} className="profile-photo--home" priority />
+            <div className="hero-identity-text">
+              <p className="eyebrow">{homePage.eyebrow}</p>
+              <h1>{homePage.title}</h1>
+              <SignatureTrace variant="flow" />
+            </div>
+          </div>
           <p>
             <strong>{homePage.role}</strong>
           </p>
@@ -39,6 +45,9 @@ export default function HomePage() {
               </span>
             ))}
           </div>
+          <p className="hero-capability-link">
+            <Link href="/about/">Xem đầy đủ năng lực →</Link>
+          </p>
         </div>
       </section>
 
@@ -56,3 +65,4 @@ export default function HomePage() {
     </>
   );
 }
+

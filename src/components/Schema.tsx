@@ -10,6 +10,7 @@ export function PersonSchema({ pagePath = "/about/" }: { pagePath?: string }) {
       name: siteConfig.name,
       alternateName: siteConfig.alternateName,
       jobTitle: siteConfig.jobTitle,
+      image: absoluteUrl("/photos/vo-nhat-quang.jpg"),
       worksFor: {
         "@type": "Organization",
         name: siteConfig.worksFor.name,

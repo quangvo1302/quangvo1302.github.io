@@ -1,4 +1,6 @@
 import { Reveal, SignatureTrace } from "@/components/animation";
+import { CapabilitySummary } from "@/components/CapabilitySummary";
+import { ProfilePhoto } from "@/components/ProfilePhoto";
 import { PersonSchema } from "@/components/Schema";
 import { SectionContent } from "@/components/SectionContent";
 import { aboutPage } from "@/data/pages";
@@ -16,10 +18,13 @@ export default function AboutPage() {
     <article className="wrap">
       <PersonSchema pagePath="/about/" />
       <header className="page-hero">
+        <ProfilePhoto size={128} className="profile-photo--about" />
         <h1>{aboutPage.title}</h1>
         <SignatureTrace variant="pulse" />
         <p>{aboutPage.intro}</p>
       </header>
+      <CapabilitySummary />
+
       <SectionContent sections={aboutPage.sections} animate />
 
       <Reveal as="section" delay={aboutPage.sections.length * 0.08}>
