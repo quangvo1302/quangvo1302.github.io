@@ -18,6 +18,8 @@ export type CaseStudy = {
   scale: string;
   industry: string;
   vendors: readonly string[];
+  industries: readonly string[];
+  pillars: readonly string[];
   stack: readonly string[];
   diagram: string;
   outcomeBasis: "qualitative" | "target";

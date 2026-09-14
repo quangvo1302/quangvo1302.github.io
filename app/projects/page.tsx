@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { Reveal, SignatureTrace } from "@/components/animation";
+import { FilterableProjects } from "@/components/FilterableProjects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { projectsIndexPage } from "@/data/pages";
-import { getProjectsByCategory, projectCategorySections } from "@/data/projects";
+import { getProjectsByCategory, projects } from "@/data/projects";
+import { projectCategorySections } from "@/data/labels";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -25,16 +28,27 @@ export default function ProjectsPage() {
         </p>
       </header>
 
+      <Suspense fallback={<ProjectsFallback />}>
+        <FilterableProjects projects={projects} />
+      </Suspense>
+    </div>
+  );
+}
+
+function ProjectsFallback() {
+  return (
+    <>
       {projectCategorySections.map((section, index) => (
         <Reveal as="section" delay={index * 0.08} key={section.key}>
           <h2>{section.label}</h2>
           <div className="cards">
-            {getProjectsByCategory(section.key).map((project) => (
+            {getProjectsByCategory(section.key).map(project => (
               <ProjectCard project={project} key={project.slug} />
             ))}
           </div>
         </Reveal>
       ))}
-    </div>
+    </>
   );
 }
+

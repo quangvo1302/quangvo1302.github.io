@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { Reveal, SignatureTrace } from "@/components/animation";
+import { FilterablePosts } from "@/components/FilterablePosts";
 import { PostCard } from "@/components/PostCard";
 import { TaxonomyNav } from "@/components/TaxonomyNav";
 import { postsIndexPage } from "@/data/pages";
 import { getPostsNewestFirst } from "@/data/posts";
 import { pageMetadata } from "@/lib/metadata";
+import type { Post } from "@/data/types";
 
 export const metadata = pageMetadata({
   title: postsIndexPage.seoTitle,
@@ -28,51 +31,36 @@ export default function PostsPage() {
 
       <TaxonomyNav active="all" />
 
-      <Reveal className="post-cards-list">
-        {posts.map((post) => (
-          <PostCard post={post} key={post.slug} />
-        ))}
-      </Reveal>
+      <Suspense fallback={<PostsFallback posts={posts} />}>
+        <FilterablePosts posts={posts} />
+      </Suspense>
 
       <Reveal className="post-list-footer-box" delay={0.1}>
         <div className="footer-box-col">
           <h3>Khám phá theo danh mục</h3>
           <ul className="taxonomy-quick-links">
-            <li>
-              <Link href="/posts/series/">
-                <strong>Chuyên đề</strong> — Các chuỗi bài phân tích chuyên sâu theo chủ đề
-              </Link>
-            </li>
-            <li>
-              <Link href="/posts/vendors/">
-                <strong>Nhà cung cấp</strong> — Phân loại theo ETAP, Ignition, Wonderware...
-              </Link>
-            </li>
-            <li>
-              <Link href="/posts/industries/">
-                <strong>Ngành công nghiệp</strong> — Dầu khí, Điện lực, Sản xuất...
-              </Link>
-            </li>
-            <li>
-              <Link href="/posts/pillars/">
-                <strong>Trụ cột nội dung</strong> — Tích hợp đa nền tảng, ranh giới hệ thống
-              </Link>
-            </li>
+            <li><Link href="/posts/series/"><strong>Chuyên đề</strong> — Các chuỗi bài phân tích chuyên sâu theo chủ đề</Link></li>
+            <li><Link href="/posts/vendors/"><strong>Nhà cung cấp</strong> — Phân loại theo ETAP, Ignition, Wonderware...</Link></li>
+            <li><Link href="/posts/industries/"><strong>Ngành công nghiệp</strong> — Dầu khí, Điện lực, Sản xuất...</Link></li>
+            <li><Link href="/posts/pillars/"><strong>Trụ cột nội dung</strong> — Tích hợp đa nền tảng, ranh giới hệ thống</Link></li>
           </ul>
         </div>
         <div className="footer-box-col">
           <h3>Dự án thực tế</h3>
-          <p>
-            Các bài viết trên là phân tích case study công khai của bên thứ ba. Để
-            xem các dự án thực tế Võ Nhật Quang đã triển khai tại các nhà máy ở Việt Nam:
-          </p>
-          <p>
-            <Link className="action-link" href="/projects/">
-              Xem 9 dự án kỹ thuật →
-            </Link>
-          </p>
+          <p>Các bài viết trên là phân tích case study công khai của bên thứ ba. Để xem các dự án thực tế Võ Nhật Quang đã triển khai tại các nhà máy ở Việt Nam:</p>
+          <p><Link className="action-link" href="/projects/">Xem 9 dự án kỹ thuật →</Link></p>
         </div>
       </Reveal>
     </div>
+  );
+}
+
+function PostsFallback({ posts }: { posts: Post[] }) {
+  return (
+    <Reveal className="post-cards-list">
+      {posts.map((post) => (
+        <PostCard post={post} key={post.slug} />
+      ))}
+    </Reveal>
   );
 }

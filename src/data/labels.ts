@@ -26,7 +26,11 @@ export const termLabels: Readonly<Record<string, string>> = {
   "osisoft-pi": "OSIsoft PI",
   aveva: "AVEVA",
   rockwell: "Rockwell Automation",
-  mitsubishi: "Mitsubishi Electric"
+  mitsubishi: "Mitsubishi Electric",
+  "ban-tu-dong-hoa": "Bán tự động hoá",
+  "hop-nhat-du-lieu-van-hanh": "Hợp nhất dữ liệu vận hành",
+  "nang-cap-hien-dai-hoa": "Nâng cấp & hiện đại hoá hệ điều khiển",
+  "giam-sat-tap-trung": "Giám sát tập trung"
 };
 
 export const taxonomyOrder: readonly PostTaxonomy[] = [
