@@ -188,6 +188,20 @@ function scanBuiltOutput() {
       continue;
     }
 
+    if (file.endsWith(".txt")) {
+      // Next.js static export emits per-route RSC flight-data payloads as .txt
+      // (__next._full.txt, __next._tree.txt, __PAGE__.txt under __next.*/ dirs,
+      // and a sibling index.txt) — these mirror rendered page body text (same
+      // exemption as HTML body paragraphs) and are not part of any authored
+      // static-text surface. Only check genuinely authored .txt files like
+      // llms.txt/robots.txt.
+      const isNextInternalPayload = rel.includes("__next") || basename(file) === "index.txt";
+      if (!isNextInternalPayload) {
+        check(rel, "txt content", readFileSync(file, "utf8"));
+      }
+      continue;
+    }
+
     if (!file.endsWith(".html")) continue;
     const html = readFileSync(file, "utf8");
 

@@ -22,7 +22,11 @@ export const siteConfig = {
     "SCADA",
     "PLC programming",
     "OT-IT integration",
-    "Overall Equipment Effectiveness"
+    "Overall Equipment Effectiveness",
+    "Siemens",
+    "Schneider Electric",
+    "Ignition",
+    "OSIsoft PI"
   ],
   personId: "https://vonhatquang.site/about/#person"
 } as const;
