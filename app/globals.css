@@ -1159,3 +1159,88 @@ figcaption { font-size: 0.82rem; color: var(--accent); margin-top: 0.4rem; }
 .capability-list li + li {
   margin-top: 0.3rem;
 }
+
+.term-gloss-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.term-gloss {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: help;
+  border-bottom: 1px dashed var(--accent);
+  text-decoration: none;
+}
+
+.term-gloss:hover,
+.term-gloss:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.term-gloss-popover {
+  position: absolute;
+  bottom: calc(100% + 0.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 18rem;
+  background: var(--heading);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  z-index: 20;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: break-word;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0s linear 0.15s;
+}
+
+.term-gloss-popover::after {
+  content: "";
+  position: absolute;
+  bottom: -0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 0.35rem solid transparent;
+  border-right: 0.35rem solid transparent;
+  border-top: 0.3rem solid var(--heading);
+}
+
+.term-gloss-wrap:hover .term-gloss-popover,
+.term-gloss-wrap:focus-within .term-gloss-popover {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.15s ease;
+}
+
+.term-gloss-popover.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.15s ease;
+}
+
+@media (max-width: 26rem) {
+  .term-gloss-popover {
+    max-width: 14rem;
+    left: 0;
+    transform: none;
+  }
+}

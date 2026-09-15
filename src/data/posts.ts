@@ -33,7 +33,7 @@ export const posts: readonly Post[] = [
       {
         heading: "Cách xử lý",
         paragraphs: [
-          `Đây không phải một dự án "nâng cấp phần mềm" — nó là một dự án xây lại toàn bộ lớp truyền thông vật lý trước, rồi mới tính đến phần mềm. Đội kỹ sư kéo một mạng cáp quang dự phòng tốc độ cao xuyên toàn nhà máy, nối các thiết bị đo lường, RTU và thiết bị đóng cắt về trung tâm — thay thế hoàn toàn việc ghi chép tay bằng luồng dữ liệu OPC DA thời gian thực. Trên nền tảng đó, ETAP eSCADA được dùng để tích hợp hơn 27.000 tag dữ liệu và dựng hơn 400 trang giao diện giám sát chi tiết đến từng máy biến áp — cùng với một thuật toán giám sát nhu cầu cực đại chạy trên mô hình bản sao số điện lực, tự động cảnh báo trước khi nhà máy vượt ngưỡng công suất.`
+          `Đây không phải một dự án "nâng cấp phần mềm" — nó là một dự án xây lại toàn bộ lớp truyền thông vật lý trước, rồi mới tính đến phần mềm. Đội kỹ sư kéo một mạng cáp quang dự phòng tốc độ cao xuyên toàn nhà máy, nối các thiết bị đo lường, RTU và thiết bị đóng cắt về trung tâm — thay thế hoàn toàn việc ghi chép tay bằng luồng dữ liệu {{OPC DA}} thời gian thực. Trên nền tảng đó, ETAP {{eSCADA}} được dùng để tích hợp hơn 27.000 tag dữ liệu và dựng hơn 400 trang giao diện giám sát chi tiết đến từng máy biến áp — cùng với một thuật toán giám sát nhu cầu cực đại chạy trên mô hình bản sao số điện lực, tự động cảnh báo trước khi nhà máy vượt ngưỡng công suất.`
         ]
       },
       {
@@ -67,7 +67,7 @@ export const posts: readonly Post[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Warren E&P vận hành một cụm giếng dầu liên tục ở Nam California với hệ thống SCADA dựng trên nền Wonderware — cấu trúc dựa vào một chuỗi phụ thuộc dày đặc: máy chủ Galaxy trung tâm, các DAServer, và phần mềm trung gian KEPServerEX để kéo dữ liệu từ PLC ngoài hiện trường. Vấn đề không nằm ở bất kỳ thành phần nào riêng lẻ, mà ở chỗ toàn bộ chuỗi này là một điểm nghẽn lỗi duy nhất: chỉ cần cơ sở dữ liệu Galaxy trung tâm gặp sự cố, phòng điều khiển lập tức "mù" hoàn toàn trước thông số giếng khoan đang chảy. Chi phí license tính theo từng tag và từng máy trạm cũng tăng liên tục khi mạng lưới giếng mở rộng.`,
+          `Warren E&P vận hành một cụm giếng dầu liên tục ở Nam California với hệ thống SCADA dựng trên nền Wonderware — cấu trúc dựa vào một chuỗi phụ thuộc dày đặc: máy chủ Galaxy trung tâm, các DAServer, và phần mềm trung gian {{KEPServerEX}} để kéo dữ liệu từ PLC ngoài hiện trường. Vấn đề không nằm ở bất kỳ thành phần nào riêng lẻ, mà ở chỗ toàn bộ chuỗi này là một điểm nghẽn lỗi duy nhất: chỉ cần cơ sở dữ liệu Galaxy trung tâm gặp sự cố, phòng điều khiển lập tức "mù" hoàn toàn trước thông số giếng khoan đang chảy. Chi phí license tính theo từng tag và từng máy trạm cũng tăng liên tục khi mạng lưới giếng mở rộng.`,
           `Quyết định được đưa ra: chuyển sang Ignition — nhưng với một ràng buộc gần như phi lý: 30 ngày, và không được phép mất một phút hiển thị dữ liệu thời gian thực nào, vì cơ sở vận hành liên tục 24/7.`
         ]
       },
