@@ -5,6 +5,15 @@ export type ContentSection = {
   paragraphs: readonly string[];
 };
 
+export type EducationGroup = {
+  label: string;
+  items: readonly { title: string; detail: string }[];
+};
+export type EducationSection = {
+  heading: string;
+  groups: readonly EducationGroup[];
+};
+
 export type CaseStudy = {
   slug: string;
   title: string;

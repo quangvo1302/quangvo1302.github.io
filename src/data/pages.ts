@@ -1,4 +1,4 @@
-import type { ContentSection, StaticPage } from "./types";
+import type { ContentSection, EducationSection, StaticPage } from "./types";
 
 export const homePage = {
   title: "Võ Nhật Quang",
@@ -66,12 +66,34 @@ export const aboutPage: StaticPage & {
         "Tôi đang đi về phía tư vấn và thiết kế giải pháp chuyển đổi số cho nhà máy, thay vì đi sâu thành chuyên gia của một hãng duy nhất.",
         "Lý do nằm ở chỗ những bài toán đáng giá nhất tôi gặp trong vài năm gần đây đều không nằm gọn trong một hãng: đưa dữ liệu từ nhiều nguồn khác nhau về một mối, ghép lớp điều khiển với lớp quản lý, và trả lời câu hỏi một khoản đầu tư tự động hoá có đáng chi hay không. Những bài đó cần biết đủ rộng để so sánh, và biết đủ sâu để không bị bán cho thứ không cần."
       ]
+    }
+  ]
+};
+
+export const aboutEducation: EducationSection = {
+  heading: "Học vấn và chứng chỉ",
+  groups: [
+    {
+      label: "Học vấn",
+      items: [
+        {
+          title: "Thạc sĩ Kỹ thuật Điều khiển và Tự động hoá",
+          detail: "Đại học Bách khoa TP. Hồ Chí Minh, 2018–2021"
+        },
+        {
+          title: "Kỹ sư Kỹ thuật Điều khiển và Tự động hoá",
+          detail: "Đại học Bách khoa TP. Hồ Chí Minh, 2013–2018"
+        }
+      ]
     },
     {
-      heading: "Học vấn và chứng chỉ",
-      paragraphs: [
-        "Thạc sĩ Kỹ thuật Điều khiển và Tự động hoá, Đại học Bách khoa TP. Hồ Chí Minh, 2018 đến 2021. Kỹ sư cùng ngành, cùng trường, 2013 đến 2018.",
-        "Khoá SITRAIN của Siemens về SIMATIC WinCC V8, hệ thống. Đào tạo thực hành nền tảng ETAP Real-Time tại Hoa Kỳ, phục vụ mảng giám sát và điều khiển hệ điện thời gian thực mà đơn vị tôi triển khai cho khách hàng."
+      label: "Chứng chỉ",
+      items: [
+        { title: "SITRAIN (Siemens)", detail: "SIMATIC WinCC V8" },
+        {
+          title: "Đào tạo thực hành ETAP Real-Time",
+          detail: "Hoa Kỳ, phục vụ giám sát và điều khiển hệ điện thời gian thực"
+        }
       ]
     }
   ]

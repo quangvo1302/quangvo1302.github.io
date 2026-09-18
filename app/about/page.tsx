@@ -1,10 +1,10 @@
 import { Reveal, SignatureTrace } from "@/components/animation";
 import { CapabilitySummary } from "@/components/CapabilitySummary";
+import { ContactList } from "@/components/ContactList";
 import { ProfilePhoto } from "@/components/ProfilePhoto";
 import { PersonSchema } from "@/components/Schema";
 import { SectionContent } from "@/components/SectionContent";
-import { aboutPage } from "@/data/pages";
-import { siteConfig } from "@/data/site";
+import { aboutEducation, aboutPage } from "@/data/pages";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -28,12 +28,24 @@ export default function AboutPage() {
       <SectionContent sections={aboutPage.sections} animate />
 
       <Reveal as="section" delay={aboutPage.sections.length * 0.08}>
+        <h2>{aboutEducation.heading}</h2>
+        {aboutEducation.groups.map((group) => (
+          <div className="education-group" key={group.label}>
+            <h3>{group.label}</h3>
+            <ul>
+              {group.items.map((item) => (
+                <li key={item.title}>
+                  <strong>{item.title}</strong> — {item.detail}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </Reveal>
+
+      <Reveal as="section" delay={(aboutPage.sections.length + 1) * 0.08}>
         <h2>Liên hệ</h2>
-        <p>
-          Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>. Hồ sơ nghề
-          nghiệp trên <a href={siteConfig.linkedin}>LinkedIn</a> và mã nguồn trên{" "}
-          <a href={siteConfig.github}>GitHub</a>.
-        </p>
+        <ContactList />
       </Reveal>
     </article>
   );

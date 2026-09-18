@@ -143,6 +143,7 @@ p { margin-top: 0.8rem; }
 a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
 
 :is(article.wrap, div.wrap, section.wrap) > p a:not(.back-link):not(.action-link),
+.contact-list a:not(.back-link):not(.action-link),
 .post-content p a,
 .footer-box-col p a:not(.action-link),
 .taxonomy-desc a {
@@ -151,6 +152,7 @@ a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset:
 }
 
 :is(article.wrap, div.wrap, section.wrap) > p a:not(.back-link):not(.action-link)::after,
+.contact-list a:not(.back-link):not(.action-link)::after,
 .post-content p a::after,
 .footer-box-col p a:not(.action-link)::after,
 .taxonomy-desc a::after {
@@ -167,6 +169,8 @@ a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset:
 
 :is(article.wrap, div.wrap, section.wrap) > p a:not(.back-link):not(.action-link):hover::after,
 :is(article.wrap, div.wrap, section.wrap) > p a:not(.back-link):not(.action-link):focus-visible::after,
+.contact-list a:not(.back-link):not(.action-link):hover::after,
+.contact-list a:not(.back-link):not(.action-link):focus-visible::after,
 .post-content p a:hover::after,
 .post-content p a:focus-visible::after,
 .footer-box-col p a:not(.action-link):hover::after,
@@ -1158,6 +1162,11 @@ figcaption { font-size: 0.82rem; color: var(--accent); margin-top: 0.4rem; }
 
 .capability-list li + li {
   margin-top: 0.3rem;
+}
+
+.education-group ul,
+.contact-list {
+  margin-top: 0.8rem;
 }
 
 .term-gloss-wrap {

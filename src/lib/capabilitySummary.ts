@@ -4,7 +4,7 @@ import type { CaseStudy } from "@/data/types";
 import { projects } from "@/data/projects";
 
 export type CapabilityGroup = {
-  key: "platforms" | "industries" | "pillars" | "managementScope" | "certifications";
+  key: "platforms" | "industries" | "pillars" | "managementScope" | "softSkills" | "certifications";
   label: string;
   items: readonly string[];
 };
@@ -49,6 +49,14 @@ export function getCapabilitySummary(
     "Từ đầu năm 2025 quản lý bốn đội chuyên môn với gần hai mươi người"
   ];
 
+  const softSkills = [
+    "Quản trị đội kỹ thuật đa chuyên môn (C&I, Chuyển đổi số, ETAP Automation, ETAP Service)",
+    "Giải quyết sự cố hiện trường dưới áp lực thời gian chạy thử",
+    "Thẩm định rủi ro và hiệu quả đầu tư trước khi khách hàng duyệt chi",
+    "Giao tiếp đa bên: kinh doanh, khách hàng, kỹ sư",
+    "Kèm cặp và phát triển kỹ sư mới"
+  ];
+
   const certifications = [
     "SITRAIN của Siemens về SIMATIC WinCC V8",
     "Đào tạo thực hành nền tảng ETAP Real-Time tại Hoa Kỳ"
@@ -59,6 +67,7 @@ export function getCapabilitySummary(
     { key: "industries", label: "Ngành đã phục vụ", items: industries },
     { key: "pillars", label: "Trục chuyên môn", items: pillars },
     { key: "managementScope", label: "Phạm vi quản lý", items: managementScope },
+    { key: "softSkills", label: "Kỹ năng mềm", items: softSkills },
     { key: "certifications", label: "Chứng chỉ, đào tạo", items: certifications },
   ];
 }
