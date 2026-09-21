@@ -34,32 +34,30 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Ở nhà máy Nam Duong, thông tin từ bộ phận kế hoạch được chuyển tới các phòng ban qua email, kèm tài liệu Excel đính kèm.`,
-          `Cách đó chạy được, nhưng quy trình bị rời rạc và khó kiểm soát. Mỗi lần chuyển giao là một sự kiện độc lập nằm trong hộp thư của từng người, không phải một bước trong một luồng có thể theo dõi.`
+          `Trước đây tại nhà máy Nam Duong, bộ phận kế hoạch chuyển thông tin sản xuất sang các phòng ban bằng cách gửi file Excel qua email. Cách làm này vẫn duy trì được công việc hằng ngày, nhưng dữ liệu bị phân tán trong hộp thư của từng cá nhân khiến tiến độ luồng công việc khó theo dõi và kiểm soát.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Bối cảnh quyết định phạm vi. Nhà máy đã có định hướng dùng Ignition làm nền tảng trung tâm, và đây là dự án đầu tiên chạy trên nền tảng đó. Nên mục tiêu không dừng ở chỗ tự động hoá một thao tác xuất file. Mục tiêu là đưa hẳn việc chuyển giao kế hoạch sản xuất tới người vận hành lên nền tảng, tự động và có kiểm soát.`,
-          `Ràng buộc lớn nhất nằm ở tài liệu. Tài liệu BOM của nhà máy không thể đổi định dạng cho vừa với các hàm mặc định của Ignition. Đây là tài liệu của bộ phận kế hoạch, gắn với cách họ làm việc, không phải thứ chỉnh lại được để phần mềm đọc cho tiện.`,
-          `Nên phần công việc đi theo hướng ngược lại: viết script riêng để Ignition đọc được đúng định dạng đang có, và can thiệp ở lớp SQL để quy hoạch lại cấu trúc dữ liệu cho phù hợp với luồng mới. Công cụ uốn theo tài liệu, không phải tài liệu uốn theo công cụ.`
+          `Dự án này là bước đầu tiên triển khai nền tảng Ignition tại nhà máy nhằm hướng tới mục tiêu dùng chung một hệ thống trung tâm. Yêu cầu chính là đưa toàn bộ việc chuyển giao kế hoạch sản xuất xuống người vận hành lên nền tảng mới, tự động hóa và có kiểm soát trạng thái.`,
+          `Khó khăn lớn nhất nằm ở định dạng file BOM. Tài liệu này gắn với nghiệp vụ quen thuộc của bộ phận kế hoạch nên không thể tùy ý thay đổi mẫu biểu chỉ để khớp với các hàm mặc định của phần mềm. Do đó, phương án triển khai là viết script riêng trên Ignition để đọc trực tiếp cấu trúc file hiện hữu, đồng thời tổ chức lại cơ sở dữ liệu trên MS SQL cho phù hợp với luồng nghiệp vụ mới, giúp công cụ đáp ứng linh hoạt theo quy trình thực tế.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Script tuỳ chỉnh chạy trên nền Ignition, đọc trực tiếp định dạng tài liệu BOM hiện hữu của nhà máy thay vì yêu cầu đổi định dạng.`,
-          `Cấu trúc dữ liệu trên MS SQL, quy hoạch lại để phục vụ luồng chuyển giao mới.`,
-          `Luồng chuyển giao kế hoạch sản xuất từ bộ phận kế hoạch tới người vận hành, chạy tự động và theo dõi được.`
+          `Script tùy chỉnh chạy trên nền Ignition, đọc trực tiếp định dạng file BOM hiện hành của nhà máy mà không cần đổi biểu mẫu.`,
+          `Cấu trúc cơ sở dữ liệu trên MS SQL được quy hoạch lại cho luồng xử lý mới.`,
+          `Luồng chuyển giao kế hoạch sản xuất tự động từ bộ phận kế hoạch tới người vận hành, có giám sát trạng thái thực hiện.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `Việc chuyển giao kế hoạch chuyển từ email kèm file sang một luồng nằm trên nền tảng, nên theo dõi được thay vì nằm rải trong hộp thư từng người.`,
-          `Thao tác xuất định mức thủ công được bỏ khỏi công việc hằng ngày của bộ phận kế hoạch và bộ phận sản xuất.`,
-          `Đây cũng là dự án đầu tiên chạy trên Ignition tại nhà máy, mở đường cho việc dùng nền tảng này làm chỗ tập trung cho các bước sau.`
+          `Dữ liệu kế hoạch được chuyển từ email sang quản lý tập trung trên hệ thống, giúp các bộ phận dễ dàng theo dõi tiến độ công việc.`,
+          `Thao tác xuất định mức thủ công hằng ngày của phòng kế hoạch và sản xuất được loại bỏ.`,
+          `Đây cũng là dự án khởi đầu trên nền Ignition tại nhà máy, tạo tiền đề để mở rộng các hạng mục tiếp theo.`
         ]
       }
     ]
@@ -90,31 +88,29 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Dự án ở EVNGenco 3 không phải là làm một phần mềm. Nó là dựng một lớp dữ liệu vận hành tập trung trên nền OSIsoft PI, gom dữ liệu từ nhiều nguồn khác nhau của nhà máy: từ DCS, và cả từ những chỗ vẫn phải nhập tay. Mục tiêu là quy về một mối để quản lý và kiểm soát.`,
-          `Quản lý than là một cấu phần trong đó. Trước dự án, việc theo dõi than từ khi tàu về được làm qua các biểu mẫu cùng một phần mềm riêng.`,
-          `Phần mềm đó chạy được. Vấn đề là nó không tích hợp được với PI. Nghĩa là dữ liệu than sẽ nằm ngoài đúng cái hệ thống được dựng lên để không còn dữ liệu nằm ngoài.`
+          `Dự án tại EVNGenco 3 tập trung xây dựng lớp dữ liệu vận hành tập trung trên nền OSIsoft PI, gom toàn bộ thông tin từ hệ thống DCS và các điểm nhập liệu thủ công về một mối quản lý.`,
+          `Quản lý than là một cấu phần trong phạm vi này. Trước đó, nhà máy theo dõi than nhập từ tàu bằng các biểu mẫu và một phần mềm riêng lẻ. Ứng dụng này vẫn hoạt động được, nhưng không thể kết nối trực tiếp vào PI, khiến mảng dữ liệu than bị tách rời khỏi hệ thống dữ liệu chung đang xây dựng.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Khi một công cụ đang chạy tốt nhưng không ghép được vào kiến trúc đích, chỉ có hai đường: bắc cầu cho nó, hoặc làm lại. Đội ngũ trao đổi với khách hàng và thống nhất chọn đường thứ hai, xây dựng lại ứng dụng quản lý để nó nằm thẳng trên nền PI.`,
-          `Đây là lựa chọn tốn công hơn ở thời điểm quyết định. Đổi lại, nó không để lại một lớp trung gian phải nuôi về sau, và dữ liệu than đi vào cùng một nơi với phần còn lại của nhà máy chứ không phải được đồng bộ sang định kỳ.`,
-          `Tôi tham gia với vai trò kỹ sư phát triển, viết ứng dụng bằng C# trên nền PI. Ứng dụng quản lý tồn than, và tính hiệu năng tua-bin từ dữ liệu vận hành sẵn có trong hệ.`
+          `Đứng trước công cụ đang dùng nhưng không thể ghép nối vào kiến trúc đích, việc tạo thêm lớp cầu nối trung gian sẽ để lại gánh nặng bảo trì lâu dài. Sau khi bàn bạc với khách hàng, đội ngũ thống nhất viết lại hoàn toàn ứng dụng quản lý than trực tiếp trên nền PI. Lựa chọn này đòi hỏi nhiều công sức ban đầu nhưng giúp dữ liệu than đi thẳng vào hạ tầng chung cùng với toàn bộ thông số nhà máy.`,
+          `Trong dự án này, tôi tham gia với vai trò kỹ sư phát triển, viết ứng dụng bằng C# trên nền PI để quản lý tồn kho than và tính toán hiệu năng tua-bin từ nguồn dữ liệu vận hành có sẵn.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Ứng dụng quản lý than viết bằng C#, chạy trên nền OSIsoft PI, thay thế phần mềm rời trước đó và thay các biểu mẫu theo dõi thủ công.`,
-          `Phần tính hiệu năng tua-bin dựa trên dữ liệu đã có trong PI.`
+          `Ứng dụng quản lý than viết bằng C# chạy trực tiếp trên OSIsoft PI, thay thế phần mềm rời trước đó và các biểu mẫu ghi chép thủ công.`,
+          `Mô-đun tính toán hiệu năng tua-bin tích hợp từ dữ liệu vận hành trên PI.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `Dữ liệu than không còn đứng ngoài lớp dữ liệu tập trung của nhà máy. Nó nằm chung nơi với dữ liệu từ DCS và các nguồn nhập tay khác, nên xem và đối chiếu được cùng lúc thay vì phải mở hai hệ thống rồi tự ghép bằng mắt.`,
-          `Việc quản lý tồn than và tính hiệu năng tua-bin chuyển từ biểu mẫu sang tính trực tiếp trên dữ liệu vận hành. Nhà máy linh hoạt hơn trong điều độ, và chi phí lưu kho than giảm xuống.`
+          `Dữ liệu than được đưa về chung cơ sở dữ liệu tập trung với DCS và các nguồn nhập tay, giúp việc tra cứu và đối chiếu thông tin diễn ra đồng thời trên một hệ thống.`,
+          `Các chỉ số tồn than cùng hiệu năng tua-bin được tính toán tự động từ thông số vận hành thực tế, hỗ trợ nhà máy linh hoạt hơn trong công tác điều độ và góp phần giảm chi phí lưu kho than.`
         ]
       }
     ]
@@ -145,32 +141,31 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Trước khi có hệ thu hồi, cụm autoclave của Hiep Phu Corporation vận hành hoàn toàn bằng tay. Người vận hành theo dõi qua các bộ đo lường và hiển thị đơn lẻ gắn trên mặt tủ, mỗi đồng hồ một thông số, không có chỗ nào nhìn được toàn cảnh chu trình.`,
-          `Ở giai đoạn xả áp, toàn bộ hơi và nhiệt trong lò được xả ra môi trường qua hệ khử mùi. Đó là nhiệt đã trả tiền để tạo ra, dùng xong một lần rồi bỏ. Trong khi ở ngay cạnh đó, một lò khác đang ở giai đoạn gia nhiệt và đang tiêu thụ hơi mới từ nồi hơi.`
+          `Cụm autoclave tại Hiep Phu Corporation trước đây vận hành hoàn toàn bằng tay. Người đứng máy theo dõi thông số qua các đồng hồ đo riêng lẻ trên mặt tủ điện, thiếu một màn hình tổng quan để quan sát toàn bộ chu trình.`,
+          `Khi đến giai đoạn xả áp, toàn bộ hơi và nhiệt dư trong lò được xả thẳng ra môi trường qua hệ khử mùi. Lượng nhiệt này bị lãng phí trong khi ở ngay cạnh đó, các lò bước vào giai đoạn gia nhiệt lại phải tiêu thụ lượng hơi mới từ nồi hơi.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Ý tưởng thì hiển nhiên: lấy hơi của lò đang xả đưa sang lò đang cần gia nhiệt. Cái khó nằm ở hai chỗ khác.`,
-          `Thứ nhất là thu được bao nhiêu. Áp suất trong lò giảm dần suốt quá trình xả, nên lượng nhiệt còn dùng được cũng giảm theo. Hệ được thiết kế để tận dụng hơi trong dải từ 9 xuống 3 bar đưa sang lò khác, phần còn lại dưới ngưỡng đó mới xả ra bộ khử mùi như trước.`,
-          `Thứ hai, và đây mới là chỗ dễ hỏng, là việc rút hơi ra để thu hồi chính là can thiệp vào đường áp suất của lò đang xả. Chu trình autoclave có ba đoạn phải giữ đúng: tăng áp, giữ áp, hạ áp. Nếu thu hồi làm đường hạ áp gấp khúc thì chất lượng mẻ bị ảnh hưởng, và khi đó tiết kiệm được bao nhiêu cũng không còn ý nghĩa. Nên phần điều khiển lượng hơi phải làm sao cho cả ba đoạn diễn ra mịn nhất có thể, chứ không phải thu càng nhiều càng tốt.`,
-          `Toàn bộ được lập trình trên Siemens S7-1500 bằng TIA Portal V17, cho cả hai line.`
+          `Giải pháp đặt ra là trích hơi từ lò đang xả để cấp nhiệt cho lò chuẩn bị gia nhiệt. Yêu cầu kỹ thuật tập trung vào hai điểm chính: tính toán dải áp suất tận dụng và kiểm soát ổn định áp suất xả.`,
+          `Áp suất trong lò giảm dần suốt quá trình xả nên lượng nhiệt hữu ích cũng giảm theo. Hệ thống được thiết kế để tận dụng lượng hơi trong dải từ 9 bar xuống 3 bar dẫn sang lò khác, chỉ chuyển hướng xả qua bộ khử mùi khi áp suất tụt dưới ngưỡng 3 bar. Điểm mấu chốt là việc trích hơi sẽ can thiệp trực tiếp vào đường áp suất của lò đang xả. Chu trình autoclave bắt buộc phải duy trì chuẩn ba giai đoạn: tăng áp, giữ áp và hạ áp. Nếu việc thu hồi hơi làm đường hạ áp biến động gấp khúc, chất lượng mẻ hấp sẽ bị ảnh hưởng. Do đó, logic điều khiển van được xây dựng để điều tiết dòng hơi thật êm xuyên suốt cả ba giai đoạn.`,
+          `Toàn bộ hệ thống được lập trình cho cả hai line trên PLC Siemens S7-1500 bằng TIA Portal V17.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Chương trình điều khiển chu trình autoclave trên S7-1500, gồm phần điều tiết lượng hơi cho ba đoạn tăng, giữ và hạ áp.`,
-          `Logic thu hồi ghép giữa lò đang xả và lò đang gia nhiệt, kèm ngưỡng chuyển sang xả ra bộ khử mùi.`,
-          `Chuyển toàn bộ cụm từ vận hành tay sang bán tự động trên cả hai line.`
+          `Chương trình điều khiển chu trình autoclave trên PLC S7-1500, điều tiết lưu lượng hơi cho ba giai đoạn tăng áp, giữ áp và hạ áp.`,
+          `Logic liên động thu hồi hơi giữa lò xả và lò gia nhiệt, kèm ngưỡng tự động chuyển sang xả bộ khử mùi.`,
+          `Chuyển đổi toàn bộ cụm thiết bị từ vận hành tay sang bán tự động trên cả hai line.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `So với mục tiêu tiết kiệm chi phí gia nhiệt nồi hơi mà dự án đặt ra ban đầu, hệ đạt 140%.`,
-          `Ngoài phần chi phí, việc chuyển từ tay sang bán tự động làm nhà máy linh hoạt hơn trong điều độ, vì chu trình không còn phụ thuộc vào việc người vận hành có mặt đúng lúc để thao tác từng bước.`
+          `Hiệu quả tiết kiệm chi phí gia nhiệt nồi hơi đạt 140% so với mục tiêu ban đầu của dự án.`,
+          `Việc chuyển đổi sang chế độ bán tự động cũng giúp nhà máy chủ động hơn trong khâu điều độ, giảm bớt sự phụ thuộc vào sự có mặt và thao tác thủ công của người vận hành tại từng thời điểm.`
         ]
       }
     ]
@@ -206,32 +201,29 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Độ ẩm của liệu trên băng tải không được giám sát liên tục. Người vận hành nhìn bằng mắt và dựa vào kinh nghiệm để đánh giá.`,
-          `Cách đó hoạt động được cho tới khi sai. Băng tải quá ướt hoặc quá khô thì tấm liệu bị vỡ. Nghĩa là chất lượng của cả mẻ phụ thuộc vào việc đúng người có mặt đúng ca, và vào việc người đó nhìn ra sự thay đổi trước khi nó thành phế phẩm.`,
-          `Nhà máy của Hiep Phu Corporation có bốn line, trong đó ba line chạy thường xuyên nhất.`
+          `Tại nhà máy Hiep Phu Corporation, độ ẩm phối liệu trên băng tải trước đây không có thiết bị giám sát liên tục mà dựa vào mắt nhìn và kinh nghiệm của công nhân ca trực. Nếu liệu quá ẩm hoặc quá khô, tấm vật liệu sẽ bị vỡ ở các công đoạn sau, khiến chất lượng mẻ phụ thuộc nhiều vào việc nhận biết sớm của từng người đứng máy. Dự án cần giải quyết vấn đề này trên ba line chạy thường xuyên nhất trong số bốn line của nhà máy.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Đại lượng thực sự điều chỉnh được ở đây không phải độ ẩm mà là lực hút của hệ hút chân không đặt dưới băng tải. Hút mạnh hơn thì liệu khô hơn. Nên bài toán trở thành: đo độ ẩm, rồi lấy giá trị đó điều khiển biến tần của quạt hút.`,
-          `Chính điều này quyết định phạm vi phần cứng. Hệ phải can thiệp vào vòng điều khiển biến tần đang chạy, mà vòng đó nằm trong PLC hiện hữu của line. Không thể dựng một bộ điều khiển riêng đứng bên cạnh rồi ra lệnh vào, vì như vậy là chia đôi quyền điều khiển trên cùng một thiết bị. Nên phần logic mới được tích hợp thẳng vào S7-300 sẵn có, chứ không phải thay PLC.`,
-          `Phần người vận hành nhìn thấy thì làm mới hoàn toàn. Màn hình KTP 1200 Comfort được thiết kế lại trên TIA Portal V13, đưa độ ẩm và trạng thái hút lên một chỗ, thay cho việc đánh giá bằng mắt trước đó.`,
-          `Triển khai trên ba line chạy thường xuyên nhất trong bốn line của nhà máy.`
+          `Yếu tố tác động trực tiếp đến độ ẩm là lực hút của quạt chân không bố trí bên dưới băng tải. Hút mạnh hơn sẽ làm liệu khô nhanh hơn, vì vậy giải pháp là đo độ ẩm liên tục rồi dùng tín hiệu đó để điều khiển biến tần quạt hút.`,
+          `Vòng điều khiển biến tần vốn nằm trong PLC S7-300 hiện hữu của dây chuyền. Để tránh việc lắp thêm bộ điều khiển ngoài gây phân chia quyền điều khiển trên cùng thiết bị, toàn bộ logic mới được lập trình tích hợp trực tiếp vào PLC đang chạy.`,
+          `Về giao diện, màn hình KTP 1200 Comfort được thiết kế mới trên TIA Portal V13, đưa thông số độ ẩm và trạng thái quạt hút về cùng một chỗ để người vận hành tiện theo dõi thay cho việc quan sát cảm quan trước đây.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Phần logic điều khiển độ ẩm tích hợp vào chương trình S7-300 đang chạy, liên động với vòng điều khiển biến tần của hệ hút chân không.`,
-          `Màn hình vận hành KTP 1200 Comfort thiết kế mới trên TIA Portal V13 cho ba line.`
+          `Khối logic kiểm soát độ ẩm tích hợp vào chương trình PLC S7-300 hiện hữu, liên động với vòng điều khiển biến tần của quạt hút chân không.`,
+          `Giao diện vận hành trên màn hình KTP 1200 Comfort thiết kế bằng TIA Portal V13 cho ba line.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `Việc chỉnh lực hút chuyển từ đánh giá bằng mắt sang bám theo giá trị đo, nên các line không còn phụ thuộc vào kinh nghiệm của từng ca vận hành để giữ liệu không quá ướt hoặc quá khô.`,
-          `Ba line chuyển từ vận hành tay sang bán tự động, và điện năng tiêu thụ của nhà máy giảm xuống.`
+          `Quạt hút tự động điều chỉnh tốc độ bám sát giá trị độ ẩm đo thực tế, hạn chế tình trạng liệu quá khô hoặc quá ướt do phụ thuộc vào kinh nghiệm ca trực.`,
+          `Ba line sản xuất chuyển sang chế độ bán tự động và lượng điện năng tiêu thụ của nhà máy giảm xuống.`
         ]
       }
     ]
@@ -269,34 +261,33 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Hệ điều khiển chính của nhà máy Vietnam Agribusiness Limited chạy trên PLC Quantum. Đến thời điểm này Quantum đã dừng hỗ trợ từ hãng và không còn nguồn hàng thay thế. Một hỏng hóc phần cứng khi đó không còn là chuyện sửa trong ngày.`,
-          `Lớp giám sát phía trên là WinCC V7.0 của Siemens. Nghĩa là nhà máy vận hành một hệ hai hãng: điều khiển Schneider bên dưới, giám sát Siemens bên trên. Bản thân WinCC V7.0 cũng đã cũ và chạy chậm, và nhà máy muốn nâng.`,
-          `Hai vấn đề khác nhau về mức độ cấp bách. Một bên là rủi ro dừng máy dài ngày vì không có vật tư. Bên kia là hiệu năng.`
+          `Hệ thống điều khiển chính tại nhà máy Vietnam Agribusiness Limited vận hành trên dòng PLC Quantum của Schneider đã dừng hỗ trợ linh kiện thay thế từ hãng, tiềm ẩn rủi ro dừng máy kéo dài nếu xảy ra sự cố phần cứng. Lớp giám sát phía trên sử dụng phần mềm WinCC V7.0 của Siemens sau nhiều năm hoạt động cũng bị chậm và cần được nâng cấp.`,
+          `Hai hạng mục có tính chất khác nhau: rủi ro thiếu vật tư dự phòng ở tầng điều khiển là vấn đề cấp bách, còn tầng giám sát cần cải thiện về mặt hiệu năng.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Thứ tự làm được quyết định trước tiên: nâng lên M580 đi trước, hệ SCADA đi sau. Chừng nào Quantum còn nằm trong dây chuyền thì một hỏng hóc phần cứng vẫn có thể dừng nhà máy dài ngày, và nâng SCADA trước không giải quyết được chuyện đó. Đổi PLC trước vừa gỡ được rủi ro tồn kho, vừa đưa nhà máy về một nền tảng còn được sản xuất nên có hàng dự phòng kịp thời.`,
-          `Quyết định thứ hai là giữ nguyên WinCC ở lớp giám sát thay vì chuyển tất cả sang nền tảng Schneider cho đồng bộ một hãng. Về mặt kỹ thuật thì chuyển được. Nhưng đổi SCADA nghĩa là đổi toàn bộ màn hình mà người vận hành đã quen tay, kéo theo phải viết lại quy trình vận hành và đào tạo lại. Chi phí đó không nằm ở phần mềm. Nó nằm ở thời gian, ở nguồn lực, và ở rủi ro thao tác sai trong giai đoạn chuyển giao. Hệ hiện hữu đang là WinCC, nên giữ WinCC.`,
-          `Phần thi công bị ràng buộc bởi lịch dừng máy. Mỗi lần thay chỉ có cửa sổ hai đến ba tiếng, và cửa sổ đó không phải lúc nào cũng có. Trong khoảng đó phải tháo Quantum, lắp M580, rồi kiểm tra tính tương thích với phần còn lại của hệ. Nếu không đạt thì trả hệ về cấu hình cũ ngay trong cùng cửa sổ để nhà máy chạy tiếp, và làm lại vào lần dừng sau. Mỗi bước thay vì vậy đều phải chuẩn bị sẵn đường lui trước khi bắt đầu, chứ không phải xử lý khi đã hỏng.`,
-          `Giai đoạn sau, khi lớp điều khiển đã ổn định, mới nâng WinCC từ V7.0 SP2 lên V7.5 SP2 và chuẩn hoá lại các trạm vận hành.`
+          `Lộ trình thực hiện được xác định rõ ràng: ưu tiên nâng cấp phần cứng lên dòng Modicon M580 trước, sau đó mới xử lý hệ SCADA. Việc thay thế PLC giúp nhà máy đưa thiết bị về dòng sản phẩm đang lưu hành, giải quyết dứt điểm vấn đề linh kiện dự phòng.`,
+          `Đối với tầng giám sát, phương án lựa chọn là giữ nguyên nền tảng WinCC thay vì chuyển đổi sang phần mềm của Schneider. Giải pháp này giúp giữ nguyên bố cục màn hình quen thuộc, tránh việc phải đào tạo lại người vận hành và loại bỏ rủi ro thao tác sai khi chuyển giao hệ thống.`,
+          `Quá trình thi công tại hiện trường chịu ràng buộc lớn từ các cửa sổ dừng máy ngắn, mỗi đợt chỉ kéo dài hai đến ba tiếng. Trong khung giờ đó, đội ngũ phải tháo dỡ Quantum, lắp đặt M580 và kiểm tra tính tương thích với toàn hệ thống. Mọi bước làm đều chuẩn bị sẵn phương án quay lui về cấu hình ban đầu ngay trong cùng khung giờ nếu phát sinh lỗi tương thích, đảm bảo nhà máy luôn sẵn sàng chạy lại.`,
+          `Khi tầng điều khiển đã chạy ổn định, dự án bước sang giai đoạn nâng cấp WinCC từ bản V7.0 SP2 lên V7.5 SP2 và chuẩn hóa cấu hình cho toàn bộ các máy trạm vận hành.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Chương trình M580 cho các phần đã chuyển đổi của hệ điều khiển chính, giữ nguyên giao tiếp với lớp WinCC hiện hữu.`,
-          `Quy trình thay thế theo cửa sổ dừng máy, gồm bước kiểm tra tương thích và phương án quay lui trong cùng cửa sổ.`,
-          `Dự án WinCC V7.5 SP2 sau nâng cấp, và cấu hình trạm vận hành đã chuẩn hoá dùng chung cho toàn bộ các trạm.`
+          `Chương trình điều khiển trên PLC M580 cho các phân đoạn chuyển đổi, duy trì kết nối ổn định với hệ WinCC hiện hữu.`,
+          `Quy trình thay thế thiết bị chi tiết theo cửa sổ dừng máy, gồm bước kiểm tra tương thích và phương án hoàn trả cấu hình an toàn.`,
+          `Dự án WinCC V7.5 SP2 sau nâng cấp cùng bộ cấu hình chuẩn hóa áp dụng đồng bộ cho các trạm vận hành.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `Hệ điều khiển ổn định hơn sau khi ra khỏi nền tảng đã hết hỗ trợ. Việc mua vật tư thay thế trở lại bình thường, vì M580 vẫn đang được sản xuất.`,
-          `Ở lớp giám sát, sau khi chuẩn hoá, các trạm vận hành dùng chung một cấu hình và chất lượng vòng điều khiển được cải thiện.`,
-          `Vai trò của tôi thay đổi giữa hai giai đoạn. Giai đoạn đầu tôi làm kỹ sư lập trình. Các giai đoạn sau tôi làm trưởng nhóm lập trình trên chính hệ thống đó.`
+          `Tầng điều khiển vận hành ổn định trên nền tảng M580, đảm bảo nguồn vật tư thay thế sẵn có từ hãng.`,
+          `Ở lớp giám sát, các trạm vận hành dùng chung một cấu hình chuẩn hóa giúp cải thiện tốc độ và chất lượng điều khiển.`,
+          `Tôi tham gia dự án với vai trò kỹ sư lập trình ở giai đoạn đầu và phụ trách vị trí trưởng nhóm lập trình trong các giai đoạn tiếp theo.`
         ]
       }
     ]
@@ -327,34 +318,30 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Ý tưởng không đến từ công nghệ. Nó đến từ các buổi trao đổi với khách hàng về những gì họ hay vướng trong quá trình xử lý sự cố.`,
-          `Khi một thiết bị dừng, câu hỏi đặt ra không chỉ là sửa thế nào. Còn là dừng bao lâu, dừng vì nguyên nhân gì, nguyên nhân đó đã gặp bao nhiêu lần, và tổng lại thì nhà máy đang mất bao nhiêu năng lực sản xuất vì nó. Những câu đó cần số liệu được ghi lại có hệ thống, chứ không phải trí nhớ của người trực ca.`,
-          `Ở một góc khác, đây cũng là vấn đề quản lý đội ngũ mà tôi quan tâm ở đúng vai trò của mình. Không đo được thì không biết chỗ nào đáng ưu tiên sửa trước.`
+          `Nhu cầu phát triển hệ thống hình thành từ thực tế trao đổi với các nhà máy trong quá trình xử lý sự cố. Khi thiết bị dừng, đội ngũ quản lý không chỉ cần xử lý lỗi kỹ thuật mà còn cần nắm rõ thời gian dừng, nguyên nhân cụ thể, tần suất lặp lại và mức độ tổn thất công suất của dây chuyền. Những câu hỏi này cần số liệu ghi nhận tự động, có hệ thống thay vì dựa vào trí nhớ của người trực ca. Ở góc độ quản lý, việc thiếu dữ liệu đo lường cũng khiến việc xác định thứ tự ưu tiên trong bảo trì và vận hành trở nên khó khăn.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Chỉ số được chọn làm trung tâm là OEE, hiệu suất thiết bị tổng thể.`,
-          `Lý do chọn OEE thay vì một chỉ số khác có hai phần. Thứ nhất, đây là chỉ số cơ bản mà hầu hết nhà máy và doanh nghiệp sản xuất đều đã dùng, nên không phải dạy khách hàng một khái niệm mới trước khi nói được chuyện. Thứ hai, và quan trọng hơn, OEE thể hiện đúng ba mặt của cùng một đối tượng: tính sẵn sàng, hiệu suất, và chất lượng.`,
-          `Ba mặt đó không thay thế cho nhau. Một dây chuyền chạy suốt ca mà ra nhiều hàng lỗi thì tính sẵn sàng đẹp nhưng chất lượng kém. Một dây chuyền hàng đạt hết nhưng chạy dưới tốc độ thiết kế thì lại là chuyện khác. Nhìn riêng từng mặt thì mỗi bên kể một câu chuyện khác nhau về cùng một máy, và dễ dẫn tới ưu tiên sai. Gộp cả ba mới ra được bức tranh dùng để quyết định.`,
-          `Phần tính toán bám theo {{ISA-22400}}, tiêu chuẩn quốc tế về chỉ số hiệu năng cho quản lý sản xuất. Bám chuẩn thay vì tự định nghĩa cách tính là để con số của hệ có thể đối chiếu được với con số nhà máy đang dùng, thay vì trở thành một cách đo thứ hai không ai so được với cái gì.`,
-          `Về cách dựng hệ, nói ở mức tổng quan: dữ liệu từ thiết bị đi vào một lớp lưu trữ chuỗi thời gian trên TDengine, còn lịch sử vận hành nằm ở PostgreSQL. Hai loại dữ liệu này có nhịp ghi và cách truy vấn khác nhau, nên tách ra thay vì ép chung một nơi. Giao diện vận hành xây trên nền Ignition.`,
-          `Toàn bộ hệ do tôi tự xây dựng, từ lớp thu thập tới giao diện.`
+          `Chỉ số OEE được chọn làm thước đo trung tâm. Đây là chỉ số quen thuộc với các nhà máy sản xuất, phản ánh đồng thời ba yếu tố của thiết bị: tính sẵn sàng, hiệu suất và chất lượng. Việc tách rời từng yếu tố dễ dẫn đến đánh giá sai lệch, ví dụ dây chuyền chạy liên tục cả ca nhưng phế phẩm nhiều, hoặc sản phẩm đạt chuẩn nhưng tốc độ chạy lại thấp hơn thiết kế. Kết hợp cả ba yếu tố mới tạo ra bức tranh toàn diện phục vụ việc ra quyết định.`,
+          `Phương pháp tính toán bám sát tiêu chuẩn quốc tế {{ISA-22400}} về chỉ số hiệu năng trong quản lý sản xuất, giúp số liệu của hệ thống đồng nhất với phương pháp đo lường sẵn có tại các nhà máy.`,
+          `Về kiến trúc kỹ thuật, dữ liệu chuỗi thời gian từ thiết bị được lưu trữ trên TDengine, còn lịch sử vận hành được quản lý trên PostgreSQL để phù hợp với đặc thù ghi và truy vấn của từng loại dữ liệu. Giao diện vận hành được xây dựng trên nền tảng Ignition.`,
+          `Tôi trực tiếp thiết kế và triển khai toàn bộ hệ thống từ khâu thu thập dữ liệu đến giao diện người dùng.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Hệ giám sát hiệu suất thiết bị theo chuẩn ISA-22400, tính đủ ba thành phần sẵn sàng, hiệu suất và chất lượng.`,
-          `Giao diện theo dõi trên nền Ignition cho người vận hành và người quản lý sản xuất.`
+          `Hệ thống giám sát hiệu suất thiết bị theo chuẩn ISA-22400, phản ánh đầy đủ ba thành phần: sẵn sàng, hiệu suất và chất lượng.`,
+          `Giao diện theo dõi trên nền Ignition phục vụ kỹ thuật viên và quản lý sản xuất.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `Hệ tính đủ ba thành phần của OEE theo cách định nghĩa của ISA-22400, nên con số đưa ra đối chiếu được với con số nhà máy đang dùng thay vì là một thang đo riêng.`,
-          `Trang này mô tả ở mức tổng quan. Chi tiết cấu hình, cách tổ chức dữ liệu bên trong và mã nguồn không công khai.`
+          `Dữ liệu OEE được tính toán đầy đủ theo tiêu chuẩn ISA-22400, đồng nhất với phương pháp đánh giá thực tế của nhà máy.`,
+          `Nội dung này trình bày ở mức tổng quan. Chi tiết cấu hình, cách tổ chức dữ liệu bên trong và mã nguồn không công khai.`
         ]
       }
     ]
@@ -385,32 +372,30 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Các công đoạn ở nhà máy Nam Duong vận hành riêng lẻ, không có chỗ nào giám sát chung. Mỗi cụm thiết bị là một ốc đảo, và việc ghép chúng thành một mẻ hoàn chỉnh nằm ở người vận hành: canh thời điểm, chuyển công đoạn, kiểm tra bằng mắt rồi cho chạy tiếp.`,
-          `Hệ quả là thời gian chạy một mẻ bị kéo dài, và độ dài đó thay đổi theo người đứng ca.`
+          `Tại nhà máy Nam Duong, các công đoạn trong quy trình phối trộn tương và nghiền ớt vận hành riêng rẽ, thiếu hệ thống giám sát tập trung. Việc điều phối mẻ sản xuất phụ thuộc vào thao tác thủ công của người đứng máy từ khâu canh thời gian, chuyển công đoạn đến kiểm tra cảm quan. Cách làm này khiến tổng thời gian chạy một mẻ bị kéo dài và dao động tùy theo từng ca trực.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Vai trò của tôi ở dự án này là quản lý dự án, không phải người viết chương trình. Phần khó vì vậy nằm ở chỗ khác so với các dự án tôi trực tiếp lập trình.`,
-          `Việc đầu tiên là ngồi trực tiếp với khách hàng để thống nhất quy trình điều khiển. Quy trình phối trộn là kiến thức sản xuất của họ, không phải thứ nhà tích hợp tự nghĩ ra rồi áp xuống. Chốt được quy trình trước khi viết dòng lệnh nào là cách rẻ nhất để tránh phải viết lại.`,
-          `Sau đó là phân chia công việc cho các thành viên trong nhóm theo phần đã chốt.`,
-          `Phần còn lại là kiểm soát chất lượng lập trình, và ở đây tôi làm qua các buổi chạy simulator. Toàn bộ logic được chạy thử trên mô phỏng và soát trước khi mang ra hiện trường. Với một dây chuyền thực phẩm đang sản xuất, một lỗi tuần tự phát hiện tại chỗ không chỉ tốn thời gian sửa mà còn có thể làm hỏng nguyên liệu trong thiết bị.`
+          `Trong dự án này, tôi đảm nhiệm vai trò quản lý dự án, không trực tiếp lập trình. Công việc tập trung vào khâu thống nhất yêu cầu kỹ thuật và kiểm soát chất lượng bàn giao của nhóm.`,
+          `Bước đầu tiên là làm việc trực tiếp với khách hàng để làm rõ toàn bộ quy trình phối trộn và nghiền — đây là kiến thức sản xuất của họ, không phải thứ nhà tích hợp tự nghĩ ra rồi áp xuống — tạo cơ sở kỹ thuật thống nhất trước khi tiến hành phân chia đầu việc lập trình cho các thành viên trong nhóm.`,
+          `Để đảm bảo chất lượng, toàn bộ logic điều khiển tuần tự được kiểm thử kỹ trên môi trường mô phỏng (simulator) trước khi triển khai tại hiện trường. Đối với dây chuyền thực phẩm đang vận hành, việc sàng lọc sớm lỗi logic trên phần mềm mô phỏng giúp tránh nguy cơ làm hỏng nguyên liệu và tiết kiệm thời gian căn chỉnh tại chỗ.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Quy trình điều khiển đã thống nhất với khách hàng, làm cơ sở cho toàn bộ phần lập trình phía sau.`,
-          `Chương trình điều khiển trên TIA Portal V17 và màn hình vận hành KTP 1200 Comfort cho hai cụm thiết bị.`,
-          `Các buổi soát logic trên simulator trước khi triển khai hiện trường.`
+          `Tài liệu quy trình điều khiển đã thống nhất với nhà máy làm căn cứ lập trình.`,
+          `Chương trình điều khiển PLC trên TIA Portal V17 và giao diện giám sát màn hình KTP 1200 Comfort cho hai cụm thiết bị.`,
+          `Kịch bản kiểm thử và hoàn thiện logic trên simulator trước khi đưa ra hiện trường.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `Hai cụm chuyển từ vận hành tay sang bán tự động, và các công đoạn trước đây rời rạc được đưa về giám sát chung thay vì mỗi chỗ một đồng hồ.`,
-          `Việc chạy một mẻ không còn phụ thuộc vào người vận hành canh và chuyển từng công đoạn.`
+          `Hai cụm thiết bị chuyển sang chế độ bán tự động và được kết nối về màn hình giám sát chung.`,
+          `Quy trình chạy mẻ được kiểm soát theo chu trình định sẵn, giảm bớt thao tác căn chỉnh thủ công và giúp thời gian sản xuất giữa các ca ổn định hơn.`
         ]
       }
     ]
@@ -441,33 +426,31 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Phòng kỹ thuật quản lý công việc đội nhóm và tiến độ dự án bằng nhiều thứ rời nhau. Mỗi loại việc một chỗ, và không có chỗ nào nhìn được toàn bộ.`,
-          `Đây là vấn đề tôi gặp ở đúng vai trò của mình. Quản lý bốn đội chuyên môn nghĩa là phải trả lời được ai đang làm gì, việc nào đang trễ, và trễ vì đâu. Trả lời được những câu đó bằng cách đi hỏi từng người thì vẫn ra đáp án, nhưng đáp án cũ ngay khi vừa có.`
+          `Công tác theo dõi công việc đội nhóm và tiến độ dự án trong phòng kỹ thuật trước đây sử dụng nhiều công cụ phân tán, thiếu một giao diện nhìn nhận toàn cảnh. Khi phụ trách quản lý bốn đội chuyên môn, việc nắm bắt nhân sự đang làm gì, hạng mục nào chậm tiến độ và lý do chậm ở đâu nếu chỉ dựa vào việc hỏi trực tiếp từng người sẽ tốn nhiều thời gian và thông tin cập nhật luôn có độ trễ.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Mục tiêu là một nền tảng dùng chung cho cả phòng, không phải một công cụ cho riêng người quản lý. Nếu công cụ chỉ phục vụ người báo cáo lên trên thì người nhập liệu không có lý do gì để giữ nó chính xác, và dữ liệu sai thì mọi thứ dựng trên đó đều vô nghĩa.`,
-          `Phần lập lịch dùng phương pháp đường găng, hiển thị bằng biểu đồ Gantt. Chọn đường găng vì câu hỏi thực sự cần trả lời không phải "việc này bao giờ xong" mà là "việc nào trễ thì kéo cả dự án trễ theo". Hai câu đó cho ra hai danh sách ưu tiên khác nhau.`,
-          `Hệ chạy trên Next.js với PostgreSQL, truy cập qua Prisma, đóng gói bằng Docker và triển khai on-premise trong hạ tầng của công ty. Đặt tại chỗ vì dữ liệu là công việc nội bộ. Có phần sinh tài liệu từ biểu mẫu, tác vụ chạy theo lịch, và thông báo qua email cho những việc cần người biết mà không cần người vào xem.`
+          `Mục tiêu là xây dựng một nền tảng phục vụ trực tiếp công việc hằng ngày của toàn bộ kỹ sư trong phòng, tránh việc biến hệ thống thành một công cụ chỉ để báo cáo số liệu đơn thuần cho cấp quản lý.`,
+          `Mô-đun quản lý tiến độ áp dụng phương pháp đường găng (Critical Path Method) hiển thị qua biểu đồ Gantt, tập trung nhận diện sớm các đầu việc có nguy cơ kéo chậm tiến độ chung của toàn dự án để ưu tiên xử lý.`,
+          `Về mặt công nghệ, hệ thống chạy trên nền Next.js, cơ sở dữ liệu PostgreSQL kết nối qua Prisma, đóng gói bằng Docker và triển khai on-premise trên hạ tầng máy chủ của công ty. Ứng dụng tích hợp chức năng tự động tạo tài liệu từ mẫu biểu, chạy tác vụ nền theo lịch trình và gửi email thông báo định kỳ.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Nền tảng quản lý công việc và dự án dùng chung cho phòng kỹ thuật, chạy on-premise.`,
-          `Lập lịch theo đường găng kèm biểu đồ Gantt, bộ chỉ số theo dõi, và nhật ký thay đổi.`,
-          `Phần sinh tài liệu từ biểu mẫu và các tác vụ định kỳ kèm thông báo.`
+          `Nền tảng quản lý công việc và dự án triển khai on-premise cho phòng kỹ thuật.`,
+          `Phân hệ lập tiến độ theo đường găng trên biểu đồ Gantt, bộ chỉ số theo dõi và nhật ký ghi nhận thay đổi.`,
+          `Công cụ tự động tạo tài liệu theo mẫu và các tác vụ định kỳ kèm thông báo email.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `Phòng kỹ thuật quản lý công việc đội nhóm và tiến độ dự án trên một nền tảng chung, thay vì mỗi loại việc một chỗ.`,
-          `Hệ vẫn đang được mở rộng. Việc đang làm là kéo thêm các tác vụ phân tán khác của doanh nghiệp vào cùng hệ này, để đội ngũ chỉ phải mở một chỗ thay vì nhớ mỗi việc nằm ở đâu.`,
-          `Đó cũng là cùng một bài toán tôi gặp ở nhà máy của khách hàng, chỉ khác chỗ đứng. Ở nhà máy là dữ liệu vận hành nằm rải giữa các hệ không nói chuyện được với nhau. Ở đây là công việc nằm rải giữa các công cụ không nói chuyện được với nhau. Cách xử lý giống nhau: chọn một chỗ làm trung tâm, rồi kéo dần mọi thứ về đó thay vì bắc cầu giữa từng cặp.`,
-          `Mã nguồn của dự án này không công khai.`
+          `Hoạt động phối hợp công việc và theo dõi tiến độ của các nhóm kỹ thuật được quản lý tập trung trên một hệ thống duy nhất.`,
+          `Hệ thống tiếp tục được mở rộng để tích hợp thêm các tác vụ nội bộ khác, giúp đội ngũ kỹ sư thao tác trên một giao diện thống nhất. Bản chất bài toán quản lý này tương đồng với việc tích hợp hệ thống trong nhà máy: thay vì chắp vá các công cụ riêng rẽ, giải pháp hiệu quả là thiết lập một nền tảng trung tâm rồi gom dần các luồng dữ liệu về một mối.`,
+          `Mã nguồn dự án này không công khai.`
         ]
       }
     ]
@@ -498,29 +481,29 @@ export const projects: readonly CaseStudy[] = [
       {
         heading: "Bài toán",
         paragraphs: [
-          `Nhà máy xử lý nước thải Tra Vinh cần một hệ giám sát cho toàn bộ dây chuyền, và cần số liệu vận hành ở dạng dùng được để tự kiểm soát hệ thống, không phải chỉ để xem thời gian thực rồi thôi.`
+          `Nhà máy xử lý nước thải Tra Vinh cần xây dựng hệ thống SCADA giám sát toàn diện dây chuyền, đồng thời tự động tổng hợp số liệu vận hành thành các báo cáo phục vụ công tác kiểm soát nội bộ.`
         ]
       },
       {
         heading: "Cách tiếp cận",
         paragraphs: [
-          `Lớp điều khiển của nhà máy chạy trên PLC Modicon M241 của Schneider. Chọn Citect cho lớp giám sát vì nó cùng hệ với lớp điều khiển bên dưới, nên kết nối là đường trực tiếp của hãng, không phải bắc thêm một lớp trung gian để hai bên nói chuyện được với nhau. Mỗi lớp trung gian là thêm một chỗ có thể hỏng và thêm một thứ phải bảo trì.`,
-          `Đây là quyết định ngược với hệ ICS mà tôi làm ở một khách hàng khác, nơi tôi giữ WinCC của Siemens phía trên các bộ điều khiển Schneider. Ở đó lớp giám sát đã tồn tại và người vận hành đã quen tay, nên đổi sang cùng hãng không đáng với thời gian và rủi ro bỏ ra. Ở đây không có ràng buộc đó, hệ làm mới từ đầu, nên chọn cùng hãng là chọn cái đơn giản hơn.`,
-          `Phần báo cáo làm bằng Excel VBA, phục vụ việc kiểm soát hệ thống nội bộ của nhà máy. Số liệu vận hành được kết xuất tự động thành báo cáo thay vì phải chép tay lại từ màn hình.`
+          `Tầng điều khiển của nhà máy sử dụng PLC Modicon M241 của Schneider Electric. Phần mềm Citect được chọn cho lớp giám sát để đồng bộ cùng hãng với PLC, giúp kết nối truyền thông trực tiếp mà không cần cài đặt thêm phần mềm trung gian chuyển đổi giao thức, qua đó giảm bớt điểm lỗi tiềm ẩn và khối lượng bảo trì sau này.`,
+          `Lựa chọn này khác với dự án ICS tại một nhà máy khác, nơi tôi quyết định giữ lại WinCC của Siemens bên trên các bộ điều khiển Schneider vì người vận hành tại đó đã quen thuộc với giao diện cũ. Tại Tra Vinh, hệ thống được đầu tư mới từ đầu, không có ràng buộc đó, nên chọn cùng hãng là chọn cái đơn giản hơn.`,
+          `Về khâu báo cáo, tôi xây dựng công cụ trích xuất dữ liệu tự động bằng Excel VBA, chuyển đổi thông số lưu trữ thành các báo cáo định kỳ phục vụ theo dõi vận hành hằng ngày.`
         ]
       },
       {
         heading: "Bàn giao",
         paragraphs: [
-          `Cấu hình hệ giám sát trên Schneider Citect, kết nối trực tiếp tới các PLC M241 của dây chuyền.`,
-          `Bộ công cụ báo cáo tự động viết bằng Excel VBA, phục vụ kiểm soát vận hành nội bộ.`
+          `Cấu hình hệ thống SCADA trên Schneider Citect, giao tiếp trực tiếp với mạng PLC M241 của dây chuyền.`,
+          `Bộ công cụ trích xuất báo cáo vận hành tự động viết bằng Excel VBA.`
         ]
       },
       {
         heading: "Kết quả",
         paragraphs: [
-          `Toàn bộ dây chuyền được đưa về một chỗ giám sát chung thay vì theo dõi rời từng cụm.`,
-          `Việc lập báo cáo vận hành chuyển từ chép tay sang kết xuất tự động từ số liệu của hệ.`
+          `Toàn bộ dây chuyền xử lý nước thải được đưa về quản lý tập trung trên một giao diện giám sát chung.`,
+          `Báo cáo vận hành được hệ thống tự động kết xuất từ cơ sở dữ liệu, thay thế công việc ghi chép thông số thủ công từ màn hình.`
         ]
       }
     ]
