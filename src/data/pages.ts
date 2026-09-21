@@ -115,13 +115,3 @@ export const projectsIndexPage: StaticPage & { intro: string } = {
   intro:
     "Chín dự án, nhóm theo năng lực chứ không theo thời gian. Mỗi dự án có một trang riêng trình bày theo cùng một bố cục: vai trò và phạm vi, bài toán, cách tiếp cận, bàn giao, kết quả. Dòng thời gian sự nghiệp nằm ở trang Giới thiệu."
 };
-
-export const postsIndexPage: StaticPage & { intro: string } = {
-  title: "Bài viết",
-  seoTitle: "Ghi chép về tích hợp hệ thống tự động hoá — Võ Nhật Quang",
-  description:
-    "Phân tích case study thực tế về tích hợp đa nền tảng trong tự động hoá công nghiệp — Siemens, Schneider, Ignition, AVEVA, ETAP, OSIsoft PI.",
-  path: "/posts/",
-  intro:
-    "Loạt bài phân tích case study thực tế, công bố công khai bởi bên thứ ba, về những điểm xung đột khi tích hợp nhiều nền tảng tự động hoá với nhau. Không phải dự án của tôi — mỗi bài đều ghi rõ nguồn."
-};

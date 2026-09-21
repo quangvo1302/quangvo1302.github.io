@@ -1,5 +1,4 @@
 import { projects } from "@/data/projects";
-import { getPostsNewestFirst } from "@/data/posts";
 import { absoluteUrl, siteConfig } from "@/data/site";
 
 export const dynamic = "force-static";
@@ -17,12 +16,6 @@ export function GET() {
   lines.push("");
   for (const project of projects) {
     lines.push(`- [${project.title}](${absoluteUrl(`/projects/${project.slug}/`)}): ${project.description}`);
-  }
-  lines.push("");
-  lines.push("## Bài viết");
-  lines.push("");
-  for (const post of getPostsNewestFirst()) {
-    lines.push(`- [${post.title}](${absoluteUrl(`/posts/${post.slug}/`)}): ${post.description}`);
   }
   lines.push("");
 

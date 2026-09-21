@@ -7,7 +7,6 @@ import { ThemeToggle } from "./ThemeToggle";
 const navItems = [
   { href: "/about/", label: "Giới thiệu" },
   { href: "/projects/", label: "Dự án" },
-  { href: "/posts/", label: "Bài viết" },
   { href: "/contact/", label: "Liên hệ" }
 ];
 
