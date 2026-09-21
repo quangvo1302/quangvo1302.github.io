@@ -27,10 +27,10 @@ export const termLabels: Readonly<Record<string, string>> = {
   aveva: "AVEVA",
   rockwell: "Rockwell Automation",
   mitsubishi: "Mitsubishi Electric",
-  "ban-tu-dong-hoa": "Bán tự động hoá",
-  "hop-nhat-du-lieu-van-hanh": "Hợp nhất dữ liệu vận hành",
-  "nang-cap-hien-dai-hoa": "Nâng cấp & hiện đại hoá hệ điều khiển",
-  "giam-sat-tap-trung": "Giám sát tập trung"
+  "ban-tu-dong-hoa": "Tự động hoá quy trình sản xuất",
+  "hop-nhat-du-lieu-van-hanh": "Tích hợp dữ liệu vận hành",
+  "nang-cap-hien-dai-hoa": "Nâng cấp hệ điều khiển",
+  "giam-sat-tap-trung": "Giám sát vận hành tập trung"
 };
 
 export const taxonomyOrder: readonly PostTaxonomy[] = [
