@@ -1,4 +1,5 @@
 import { SignatureTrace } from "@/components/animation";
+import { ContactForm } from "@/components/ContactForm";
 import { ContactList } from "@/components/ContactList";
 import { contactPage } from "@/data/pages";
 import { pageMetadata } from "@/lib/metadata";
@@ -17,6 +18,8 @@ export default function ContactPage() {
         <SignatureTrace variant="minimal" />
       </header>
       <ContactList />
+      <h2>Gửi yêu cầu trực tiếp</h2>
+      <ContactForm />
     </article>
   );
 }

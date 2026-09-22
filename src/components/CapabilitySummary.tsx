@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getCapabilitySummary } from "@/lib/capabilitySummary";
 
 export function CapabilitySummary() {
@@ -16,6 +17,11 @@ export function CapabilitySummary() {
                     {group.items.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
+                    {group.cta && (
+                      <li>
+                        <Link href={group.cta.href}>{group.cta.text}</Link>
+                      </li>
+                    )}
                   </ul>
                 </td>
               </tr>
@@ -26,4 +32,3 @@ export function CapabilitySummary() {
     </section>
   );
 }
-

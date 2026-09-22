@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Reveal } from "@/components/animation";
 import { ProjectCard } from "@/components/ProjectCard";
 import { FilterBar } from "@/components/FilterBar";
+import { ProjectCategoryNav } from "@/components/ProjectCategoryNav";
 import {
   buildFilterUrl,
   getCaseStudyVendorSlugs,
@@ -94,6 +95,8 @@ export function FilterableProjects({ projects }: { projects: readonly CaseStudy[
     router.replace(pathname, { scroll: false });
   }
 
+  const activeCategories = new Set(filteredProjects.map(project => project.category));
+
   return (
     <>
       <FilterBar
@@ -103,6 +106,8 @@ export function FilterableProjects({ projects }: { projects: readonly CaseStudy[
         onClear={handleClear}
         resultCount={filteredProjects.length}
       />
+
+      <ProjectCategoryNav activeCategories={activeCategories} />
 
       {filteredProjects.length === 0 ? (
         <div className="filter-empty-state" aria-live="polite">
@@ -122,7 +127,7 @@ export function FilterableProjects({ projects }: { projects: readonly CaseStudy[
           }
 
           return (
-            <Reveal as="section" delay={index * 0.08} key={section.key}>
+            <Reveal as="section" delay={index * 0.08} id={section.key} key={section.key}>
               <h2>{section.label}</h2>
               <div className="cards">
                 {sectionProjects.map(project => (
@@ -136,4 +141,3 @@ export function FilterableProjects({ projects }: { projects: readonly CaseStudy[
     </>
   );
 }
-

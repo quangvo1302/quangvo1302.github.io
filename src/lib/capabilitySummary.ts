@@ -4,9 +4,10 @@ import type { CaseStudy } from "@/data/types";
 import { projects } from "@/data/projects";
 
 export type CapabilityGroup = {
-  key: "platforms" | "industries" | "pillars" | "managementScope" | "softSkills" | "certifications";
+  key: "platforms" | "industries" | "pillars" | "managementScope" | "softSkills" | "certifications" | "projects";
   label: string;
   items: readonly string[];
+  cta?: { text: string; href: string };
 };
 
 /** Derives platforms, industries, pillars from real project data; managementScope and certifications are static text. */
@@ -62,6 +63,11 @@ export function getCapabilitySummary(
     "Đào tạo thực hành nền tảng ETAP Real-Time tại Hoa Kỳ"
   ];
 
+  const projectsSummary = [
+    "Triển khai 9 dự án tích hợp hệ thống và tự động hoá trong sản xuất, năng lượng, xử lý nước thải",
+    "Trực tiếp phụ trách từ khảo sát kỹ thuật, thiết kế kiến trúc đến chạy thử hiện trường"
+  ];
+
   return [
     { key: "platforms", label: "Nền tảng đã triển khai", items: platforms },
     { key: "industries", label: "Ngành đã phục vụ", items: industries },
@@ -69,6 +75,12 @@ export function getCapabilitySummary(
     { key: "managementScope", label: "Phạm vi quản lý", items: managementScope },
     { key: "softSkills", label: "Kỹ năng mềm", items: softSkills },
     { key: "certifications", label: "Chứng chỉ, đào tạo", items: certifications },
+    {
+      key: "projects",
+      label: "Dự án thực tế",
+      items: projectsSummary,
+      cta: { text: "Xem các case study chi tiết →", href: "/projects/" }
+    },
   ];
 }
 

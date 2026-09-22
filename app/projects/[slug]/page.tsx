@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { Reveal, SignatureTrace } from "@/components/animation";
+import { CaseStudyComments } from "@/components/CaseStudyComments";
+import { CaseStudyCta } from "@/components/CaseStudyCta";
 import { DiagramFigure } from "@/components/DiagramFigure";
 import { ArticleSchema } from "@/components/Schema";
 import { SectionContent } from "@/components/SectionContent";
@@ -82,6 +84,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <Reveal delay={project.sections.length * 0.08 + 0.15}>
         <DiagramFigure fileName={project.diagram} />
       </Reveal>
+
+      <CaseStudyCta category={project.category} />
+      <CaseStudyComments slug={project.slug} />
     </article>
   );
 }

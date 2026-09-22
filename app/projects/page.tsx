@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Reveal, SignatureTrace } from "@/components/animation";
 import { FilterableProjects } from "@/components/FilterableProjects";
 import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectCategoryNav } from "@/components/ProjectCategoryNav";
 import { projectsIndexPage } from "@/data/pages";
 import { getProjectsByCategory, projects } from "@/data/projects";
 import { projectCategorySections } from "@/data/labels";
@@ -36,10 +37,17 @@ export default function ProjectsPage() {
 }
 
 function ProjectsFallback() {
+  const activeCategories = new Set(
+    projectCategorySections
+      .filter(section => getProjectsByCategory(section.key).length > 0)
+      .map(section => section.key)
+  );
+
   return (
     <>
+      <ProjectCategoryNav activeCategories={activeCategories} />
       {projectCategorySections.map((section, index) => (
-        <Reveal as="section" delay={index * 0.08} key={section.key}>
+        <Reveal as="section" delay={index * 0.08} id={section.key} key={section.key}>
           <h2>{section.label}</h2>
           <div className="cards">
             {getProjectsByCategory(section.key).map(project => (
@@ -51,4 +59,3 @@ function ProjectsFallback() {
     </>
   );
 }
-

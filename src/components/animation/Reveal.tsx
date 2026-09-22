@@ -3,6 +3,8 @@
 import type { ReactNode } from "react";
 import { m } from "motion/react";
 
+const PAGE_TRANSITION_EASE = [0.16, 1, 0.3, 1] as const;
+
 type RevealElement = "div" | "section" | "article" | "nav";
 
 const motionElements = {
@@ -18,6 +20,7 @@ export function Reveal({
   y = 22,
   className,
   ariaLabel,
+  id,
   children
 }: {
   as?: RevealElement;
@@ -25,12 +28,14 @@ export function Reveal({
   y?: number;
   className?: string;
   ariaLabel?: string;
+  id?: string;
   children: ReactNode;
 }) {
   const Component = motionElements[as];
 
   return (
     <Component
+      id={id}
       className={className ? `reveal ${className}` : "reveal"}
       aria-label={ariaLabel}
       initial={{ opacity: 0, y }}
