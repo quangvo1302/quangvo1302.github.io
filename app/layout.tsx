@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -27,6 +27,13 @@ export const metadata: Metadata = {
   description: siteConfig.description
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f7fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#10141d" }
+  ]
+};
+
 export default function RootLayout({
   children
 }: Readonly<{
@@ -51,8 +58,11 @@ export default function RootLayout({
         </noscript>
       </head>
       <body>
+        <a className="skip-link" href="#main">
+          Bỏ qua để đến nội dung chính
+        </a>
         <SiteHeader />
-        <main>
+        <main id="main">
           <MotionProvider>{children}</MotionProvider>
         </main>
         <SiteFooter />

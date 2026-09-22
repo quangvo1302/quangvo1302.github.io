@@ -105,7 +105,7 @@ export function FilterableProjects({ projects }: { projects: readonly CaseStudy[
       />
 
       {filteredProjects.length === 0 ? (
-        <div className="filter-empty-state">
+        <div className="filter-empty-state" aria-live="polite">
           Không có dự án nào khớp bộ lọc đã chọn.{" "}
           <button type="button" className="filter-clear" onClick={handleClear}>
             Xoá bộ lọc
