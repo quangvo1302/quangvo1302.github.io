@@ -1,7 +1,8 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
-import { WEB3FORMS_ACCESS_KEY } from "@/data/web3forms";
+
+const CONTACT_FORM_ENDPOINT = "https://vnq-contact-form.vnq-contact-form.workers.dev";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -20,18 +21,12 @@ export function ContactForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!WEB3FORMS_ACCESS_KEY) {
-      setStatus("error");
-      setErrorMessage("Form chưa được cấu hình. Vui lòng liên hệ qua email bên dưới.");
-      return;
-    }
-
     setStatus("submitting");
     const form = event.currentTarget;
     const formData = new FormData(form);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
         method: "POST",
         headers: { Accept: "application/json" },
         body: formData
@@ -66,12 +61,10 @@ export function ContactForm() {
   return (
     <form
       className="contact-form"
-      action="https://api.web3forms.com/submit"
+      action={CONTACT_FORM_ENDPOINT}
       method="POST"
       onSubmit={handleSubmit}
     >
-      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
-      <input type="hidden" name="subject" value="Liên hệ từ vonhatquang.site" />
       <div className="contact-form-honeypot" aria-hidden="true">
         <label htmlFor={`${formId}-hp`}>Để trống trường này</label>
         <input
@@ -157,8 +150,8 @@ export function ContactForm() {
       </button>
 
       <p className="contact-form-privacy">
-        Thông tin gửi qua form này được xử lý bởi Web3Forms để chuyển tới email của
-        Quang, không dùng cho mục đích khác.
+        Thông tin gửi qua form này chuyển thẳng tới email của Quang, không dùng cho
+        mục đích khác.
       </p>
     </form>
   );
