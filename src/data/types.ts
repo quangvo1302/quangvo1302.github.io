@@ -1,8 +1,19 @@
 export type ProjectCategory = "ci" | "si" | "personal";
 
+export type ContentFigure = {
+  /** Hình được chèn ngay sau đoạn văn có chỉ số này (tính từ 0). */
+  afterParagraph: number;
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+};
+
 export type ContentSection = {
   heading: string;
   paragraphs: readonly string[];
+  figures?: readonly ContentFigure[];
 };
 
 export type EducationGroup = {

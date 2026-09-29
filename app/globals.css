@@ -375,6 +375,13 @@ figure { margin-top: 1.25rem; }
 figure svg, figure img { max-width: 100%; height: auto; display: block; }
 figcaption { font-size: 0.82rem; color: var(--accent); margin-top: 0.4rem; }
 
+.content-figure { margin-block: 1.5rem; }
+.content-figure img {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+.content-figure a { display: block; cursor: zoom-in; }
+
 .diagram-light-island {
   color-scheme: light;
   color: #242c35;
