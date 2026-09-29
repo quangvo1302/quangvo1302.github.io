@@ -278,9 +278,9 @@ export const projects: readonly CaseStudy[] = [
         heading: "Điểm nghẽn nằm ở chu kỳ quét của PLC",
         paragraphs: [
           `Sau khi thay M580 ở giai đoạn đầu năm 2018, tín hiệu từ PLC ổn định nhưng phản hồi trên SCADA không cải thiện. Có những thao tác mất tới 10–11 giây mới phản hồi. Đội dự án chia hai hướng: phần cứng kiểm tra PLC, phần mềm rà soát SCADA và các script, đồng thời làm việc cùng hãng. Tôi đề xuất mượn một bộ M580 về văn phòng để dựng môi trường thử nghiệm trước khi mang xuống nhà máy. Sau nhiều vòng thử, nguyên nhân vẫn chưa rõ và hệ thống phải đưa về cấu trúc ban đầu.`,
-          `Thay vì tiếp tục tập trung vào một phía, chúng tôi rà lại toàn bộ chuỗi xử lý từ SCADA xuống PLC, kể cả những thông số tưởng như ít liên quan đến thời gian phản hồi. Một trong số đó là cấu hình {{MAST task}}, tác vụ chính của PLC. Trên M580, MAST chạy ở một trong hai chế độ. Ở chế độ Cyclic, vòng quét mới bắt đầu ngay khi vòng trước kết thúc và không có thông số thời gian chu kỳ. Ở chế độ Periodic, mỗi vòng quét bắt đầu theo một chu kỳ cố định (Period); nếu logic xử lý xong sớm, CPU chờ đến hết Period mới bắt đầu vòng tiếp theo.`,
-          `Hệ thống đang chạy MAST ở chế độ Periodic với Period 120 ms, trong khi PLC chỉ cần khoảng 15–20 ms để xử lý toàn bộ logic. Phần lớn mỗi vòng quét là thời gian chờ. Điều này ảnh hưởng trực tiếp đến SCADA, vì CPU tiếp nhận các yêu cầu truyền thông với số lượng giới hạn trong mỗi vòng quét MAST. Period càng dài, số vòng quét mỗi giây càng ít, và yêu cầu từ SCADA càng phải xếp hàng lâu hơn.`,
-          `Chúng tôi giữ chế độ Periodic và điều chỉnh Period theo kết quả đo kiểm, từ 120 ms xuống 25 ms.`
+          `Thay vì tiếp tục tập trung vào một phía, chúng tôi rà lại toàn bộ chuỗi xử lý từ SCADA xuống PLC, kể cả những thông số tưởng như ít liên quan đến thời gian phản hồi. Một trong số đó là cấu hình {{MAST task}}, tác vụ chính của PLC. Trên M580, MAST chạy ở một trong hai chế độ. Ở chế độ Cyclic, vòng quét mới bắt đầu ngay khi vòng trước kết thúc và không có thông số thời gian chu kỳ. Ở chế độ Periodic, PLC quét theo nhịp cố định: mỗi vòng quét bắt đầu theo một chu kỳ đặt trước; nếu logic xử lý xong sớm, CPU chờ đến hết chu kỳ mới bắt đầu vòng tiếp theo.`,
+          `PLC chỉ cần khoảng 15–20 ms để xử lý toàn bộ logic, trong khi Periodic đang được cấu hình ở 120 ms. Phần lớn mỗi vòng quét là thời gian chờ. Điều này ảnh hưởng trực tiếp đến SCADA, vì CPU tiếp nhận các yêu cầu truyền thông với số lượng giới hạn trong mỗi vòng quét MAST. Chu kỳ càng dài, số vòng quét mỗi giây càng ít, và yêu cầu từ SCADA càng phải xếp hàng lâu hơn.`,
+          `Chúng tôi giữ chế độ Periodic và điều chỉnh chu kỳ theo kết quả đo kiểm: 120 ms → 25 ms.`
         ],
         figures: [
           {
@@ -294,8 +294,8 @@ export const projects: readonly CaseStudy[] = [
           {
             afterParagraph: 3,
             src: "/images/ics-upgrade-wincc-migration/period-120-25-ms.webp",
-            alt: "Biểu đồ thời gian trên cùng trục 0–120 ms: với Period 120 ms, PLC xử lý logic 15–20 ms rồi chờ hết chu kỳ; với Period 25 ms, cùng khoảng 120 ms có bốn vòng quét và bốn lượt phục vụ SCADA.",
-            caption: "Cùng khoảng 120 ms: Period 120 ms chỉ có một vòng quét, Period 25 ms có bốn vòng quét trọn vẹn, nên yêu cầu từ SCADA được xử lý nhiều lượt hơn. Bấm vào hình để xem kích thước đầy đủ.",
+            alt: "Biểu đồ thời gian trên cùng trục 0–120 ms: với Periodic 120 ms, PLC xử lý logic 15–20 ms rồi chờ hết chu kỳ; với Periodic 25 ms, cùng khoảng 120 ms có bốn vòng quét và bốn lượt phục vụ SCADA.",
+            caption: "Cùng khoảng 120 ms: Periodic 120 ms chỉ có một vòng quét, Periodic 25 ms có bốn vòng quét trọn vẹn, nên yêu cầu từ SCADA được xử lý nhiều lượt hơn. Bấm vào hình để xem kích thước đầy đủ.",
             width: 1920,
             height: 1080
           }
@@ -305,7 +305,7 @@ export const projects: readonly CaseStudy[] = [
         heading: "Bàn giao",
         paragraphs: [
           `Chương trình điều khiển trên PLC M580 cho các phân đoạn chuyển đổi, duy trì kết nối ổn định với hệ WinCC hiện hữu.`,
-          `Cấu hình MAST task của M580 hiệu chỉnh theo thời gian thực thi đo được: chế độ Periodic, Period 25 ms.`,
+          `Cấu hình MAST task của M580 hiệu chỉnh theo thời gian thực thi đo được: chế độ Periodic, chu kỳ 25 ms.`,
           `Quy trình thay thế thiết bị chi tiết theo cửa sổ dừng máy, gồm bước kiểm tra tương thích và phương án hoàn trả cấu hình an toàn.`,
           `Dự án WinCC V7.5 SP2 sau nâng cấp cùng bộ cấu hình chuẩn hóa áp dụng đồng bộ cho các trạm vận hành.`
         ]
@@ -314,7 +314,7 @@ export const projects: readonly CaseStudy[] = [
         heading: "Kết quả",
         paragraphs: [
           `Tầng điều khiển vận hành ổn định trên nền tảng M580, đảm bảo nguồn vật tư thay thế sẵn có từ hãng.`,
-          `Sau khi hiệu chỉnh Period, thời gian phản hồi thao tác trên SCADA giảm từ 10–11 giây xuống còn khoảng 1–2 giây.`,
+          `Sau khi hiệu chỉnh chu kỳ Periodic, thời gian phản hồi thao tác trên SCADA giảm từ 10–11 giây xuống còn khoảng 1–2 giây.`,
           `Ở lớp giám sát, các trạm vận hành dùng chung một cấu hình chuẩn hóa giúp cải thiện tốc độ và chất lượng điều khiển.`,
           `Tôi tham gia dự án với vai trò kỹ sư lập trình ở giai đoạn đầu và phụ trách vị trí trưởng nhóm lập trình trong các giai đoạn tiếp theo.`,
           `Điều tôi giữ lại từ dự án: khi một hệ thống vận hành chậm, nguyên nhân không nhất thiết là một vấn đề lớn. Nó có thể là một thông số nhỏ đang lệch nhịp với phần còn lại, và chỉ lộ ra khi nhìn cả chuỗi từ SCADA đến PLC thay vì từng phía riêng lẻ.`
