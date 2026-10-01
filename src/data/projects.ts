@@ -302,12 +302,40 @@ export const projects: readonly CaseStudy[] = [
         ]
       },
       {
+        heading: "Khởi động WinCC chậm vì cách chia dữ liệu lưu trữ",
+        paragraphs: [
+          `Giai đoạn nâng cấp WinCC từ V7.0 SP2 lên V7.5 SP2 bắt đầu năm 2022. Sau nâng cấp, hệ thống không báo lỗi, dữ liệu vẫn được ghi đầy đủ và người vận hành vẫn giám sát, điều khiển được, nhưng mỗi lần khởi động hoặc dừng Runtime mất khoảng 30–40 phút. Kỹ sư hỗ trợ của Siemens chạy thử chính project đó trên máy thử nghiệm chưa có dữ liệu lưu trữ: Runtime khởi động trong khoảng 15 giây. Khác biệt nằm ở phần chỉ có trên máy nhà máy, khoảng 50 GB dữ liệu lưu trữ tích lũy qua nhiều năm vận hành.`,
+          `Trong WinCC V7, dữ liệu lưu trữ của Tag Logging và Alarm Logging không nằm trong một file duy nhất mà được chia thành nhiều {{segment}}. Cấu hình cũ, giống nhau cho Tag Logging Fast và Slow, giữ toàn bộ archive 3 năm và mỗi segment chứa 1 ngày. Từng con số đều hợp lý, nhưng ghép lại thành hơn 2.000 segment mà Runtime phải liên kết mỗi lần khởi động và tách ra mỗi lần dừng, trong khi khuyến cáo của hãng là tối đa 200 segment, mỗi segment tối đa 2 GB. Trình quản lý archive không kiểm tra tính hợp lý của các thông số này.`,
+          `Khuyến nghị đầu tiên của hãng là reset toàn bộ archive, nhưng dữ liệu này dùng cho audit nên không thể xóa. Chúng tôi giữ nguyên yêu cầu lưu trữ 3 năm và chỉ đổi cách chia: dung lượng tối đa của tất cả segment là 110 GB, mỗi segment chứa 3 tuần thay vì 1 ngày. Mỗi archive còn khoảng 52 segment, khoảng 104 cho cả Fast và Slow, nằm trong giới hạn 200 của hãng. Số segment phải liên kết giảm khoảng 20 lần.`,
+          `Đo trên hệ thống đã chạy một năm với cấu hình mới, thời gian khởi động và dừng Runtime còn khoảng 10 phút, không cần thêm máy chủ hay ổ lưu trữ. Hơn 2.000 segment đã tích lũy theo cấu hình cũ vẫn là dữ liệu audit phải giữ lại; giữ chúng thế nào để Runtime không phải mang theo mà khi cần vẫn lấy lại được là phần việc tiếp theo.`
+        ],
+        figures: [
+          {
+            afterParagraph: 0,
+            src: "/images/ics-upgrade-wincc-migration/wincc-khoi-dong-30-40-phut.webp",
+            alt: "Cửa sổ khởi động WinCC Runtime V7.5 SP2: Global Script Runtime và Alarm Logging Runtime đã OK, Tag Logging Runtime đang chờ, Graphics Runtime chưa chạy; đồng hồ chờ trên máy nhà máy 00:34:12 so với 00:00:15 trên máy thử của hãng.",
+            caption: "Không lỗi, không cảnh báo, nhưng cùng một project khởi động 15 giây trên máy thử của hãng và 30–40 phút trên máy nhà máy.",
+            width: 1920,
+            height: 1080
+          },
+          {
+            afterParagraph: 2,
+            src: "/images/ics-upgrade-wincc-migration/segment-archive-2000-104.webp",
+            alt: "Biểu đồ đúng tỉ lệ trên cùng trục 3 năm: mỗi segment 1 ngày cho khoảng 1.095 segment mỗi archive, mỗi segment 3 tuần cho khoảng 52; tổng Tag Logging Fast và Slow giảm từ hơn 2.000 xuống khoảng 104 segment, dưới giới hạn khuyến cáo 200. Thời gian start/stop Runtime giảm từ 30–40 phút xuống khoảng 10 phút.",
+            caption: "Cùng 3 năm dữ liệu, chỉ đổi cách chia: số segment Runtime phải liên kết giảm từ hơn 2.000 xuống khoảng 104. Bấm vào hình để xem kích thước đầy đủ.",
+            width: 1920,
+            height: 1080
+          }
+        ]
+      },
+      {
         heading: "Bàn giao",
         paragraphs: [
           `Chương trình điều khiển trên PLC M580 cho các phân đoạn chuyển đổi, duy trì kết nối ổn định với hệ WinCC hiện hữu.`,
           `Cấu hình MAST task của M580 hiệu chỉnh theo thời gian thực thi đo được: chế độ Periodic, chu kỳ 25 ms.`,
           `Quy trình thay thế thiết bị chi tiết theo cửa sổ dừng máy, gồm bước kiểm tra tương thích và phương án hoàn trả cấu hình an toàn.`,
-          `Dự án WinCC V7.5 SP2 sau nâng cấp cùng bộ cấu hình chuẩn hóa áp dụng đồng bộ cho các trạm vận hành.`
+          `Dự án WinCC V7.5 SP2 sau nâng cấp cùng bộ cấu hình chuẩn hóa áp dụng đồng bộ cho các trạm vận hành.`,
+          `Cấu hình lưu trữ mới cho Tag Logging Fast và Slow: giữ dữ liệu 3 năm, tối đa 110 GB, mỗi segment 3 tuần.`
         ]
       },
       {
@@ -315,9 +343,10 @@ export const projects: readonly CaseStudy[] = [
         paragraphs: [
           `Tầng điều khiển vận hành ổn định trên nền tảng M580, đảm bảo nguồn vật tư thay thế sẵn có từ hãng.`,
           `Sau khi hiệu chỉnh chu kỳ Periodic, thời gian phản hồi thao tác trên SCADA giảm từ 10–11 giây xuống còn khoảng 1–2 giây.`,
+          `Sau khi đổi cách chia segment, thời gian khởi động và dừng WinCC Runtime giảm từ 30–40 phút xuống khoảng 10 phút, đo trên hệ thống đã chạy một năm với cấu hình mới.`,
           `Ở lớp giám sát, các trạm vận hành dùng chung một cấu hình chuẩn hóa giúp cải thiện tốc độ và chất lượng điều khiển.`,
           `Tôi tham gia dự án với vai trò kỹ sư lập trình ở giai đoạn đầu và phụ trách vị trí trưởng nhóm lập trình trong các giai đoạn tiếp theo.`,
-          `Điều tôi giữ lại từ dự án: khi một hệ thống vận hành chậm, nguyên nhân không nhất thiết là một vấn đề lớn. Nó có thể là một thông số nhỏ đang lệch nhịp với phần còn lại, và chỉ lộ ra khi nhìn cả chuỗi từ SCADA đến PLC thay vì từng phía riêng lẻ.`
+          `Điều tôi giữ lại từ dự án: khi một hệ thống vận hành chậm, nguyên nhân không nhất thiết là một vấn đề lớn. Nó có thể là một thông số nhỏ đang lệch nhịp với phần còn lại, và chỉ lộ ra khi nhìn cả chuỗi từ SCADA đến PLC thay vì từng phía riêng lẻ. Ở giai đoạn WinCC, đó lại là những thông số lưu trữ hợp lý khi đứng riêng nhưng nhân lên thành gánh nặng sau vài năm vận hành, nên khi cấu hình lưu trữ cần tính trước hệ thống sẽ phải mang theo bao nhiêu segment.`
         ]
       }
     ]
