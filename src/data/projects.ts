@@ -338,6 +338,15 @@ export const projects: readonly CaseStudy[] = [
         ]
       },
       {
+        heading: "Lỗi ghi archive vì lệch giờ giữa các máy",
+        paragraphs: [
+          `Giữa năm 2023, file chẩn đoán của WinCC liên tục xuất hiện lỗi CCWriteArchiveServer. Hệ thống vẫn chạy, không có cảnh báo nào trên màn hình vận hành. Trao đổi qua nhiều vòng với bộ phận hỗ trợ kỹ thuật của Siemens, nguyên nhân được xác định: lỗi này chỉ xuất hiện khi dữ liệu gửi vào archive mang timestamp không khớp với giờ hiện tại của server. Server và các client WinCC đang không đồng bộ thời gian với nhau.`,
+          `Đồng bộ riêng server và client chưa đủ. Mọi thành phần có thể gửi dữ liệu vào WinCC đều phải cùng một giờ, kể cả các nguồn đi qua OPC: theo giao thức OPC, timestamp không được phép sửa trên đường đi, nên giờ sai ở nguồn sẽ đi thẳng vào archive. Manual WinCC cũng khuyến nghị đồng bộ thời gian cho toàn hệ thống.`,
+          `Phương án thống nhất với Siemens là dùng server WinCC làm {{NTP}} server cho toàn mạng. Tất cả client PC và các PLC giao tiếp qua S7, Modbus TCP/IP hay OPC đều lấy giờ từ đây. Theo Siemens, cách cấu hình PC làm NTP server này dùng được cả cho thiết bị không thuộc SIMATIC.`,
+          `Ngoại lệ duy nhất là đồng hồ đo điện năng mà KEPServerEX đọc qua Modbus RTU. Thiết bị này không đồng bộ giờ được. Sau khi Siemens xem dữ liệu của nó, hai bên thống nhất loại nó khỏi phạm vi đồng bộ, vì nó chỉ trả giá trị qua cổng serial chứ không gửi kèm timestamp riêng; giờ của dữ liệu do máy chạy OPC server gán.`
+        ]
+      },
+      {
         heading: "Bàn giao",
         paragraphs: [
           `Chương trình điều khiển trên PLC M580 cho các phân đoạn chuyển đổi, duy trì kết nối ổn định với hệ WinCC hiện hữu.`,
@@ -345,7 +354,8 @@ export const projects: readonly CaseStudy[] = [
           `Quy trình thay thế thiết bị chi tiết theo cửa sổ dừng máy, gồm bước kiểm tra tương thích và phương án hoàn trả cấu hình an toàn.`,
           `Dự án WinCC V7.5 SP2 sau nâng cấp cùng bộ cấu hình chuẩn hóa áp dụng đồng bộ cho các trạm vận hành.`,
           `Cấu hình lưu trữ mới cho Tag Logging Fast và Slow: giữ dữ liệu 3 năm, tối đa 110 GB, mỗi segment 3 tuần.`,
-          `Thư mục Backup chứa toàn bộ segment đã đóng, gồm cả hơn 2.000 segment theo cấu hình cũ, cùng script chuyển lần lượt từng cặp MDF/LDF vào CommonArchiving khi cần tra cứu.`
+          `Thư mục Backup chứa toàn bộ segment đã đóng, gồm cả hơn 2.000 segment theo cấu hình cũ, cùng script chuyển lần lượt từng cặp MDF/LDF vào CommonArchiving khi cần tra cứu.`,
+          `Phương án đồng bộ thời gian cho toàn hệ thống: server WinCC làm NTP server, client PC và PLC lấy giờ từ server; đồng hồ điện năng đọc qua Modbus RTU nằm ngoài phạm vi.`
         ]
       },
       {
