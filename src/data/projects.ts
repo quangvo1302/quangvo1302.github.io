@@ -329,13 +329,23 @@ export const projects: readonly CaseStudy[] = [
         ]
       },
       {
+        heading: "Giữ 2.000 segment cũ ngoài Runtime",
+        paragraphs: [
+          `Hơn 2.000 segment 1 ngày theo cấu hình cũ có hai yêu cầu ngược nhau. Runtime không được phải liên kết chúng mỗi lần khởi động và dừng, nếu không thì công đổi cách chia segment coi như mất. Nhưng đây là dữ liệu audit, nên khi cần xem lại một khoảng thời gian, dữ liệu phải hiện được trên chính Trend control và Alarm control của WinCC, chứ không phải mở file SQL ra đọc.`,
+          `Chỗ cất là thư mục Backup đã cấu hình khi đổi cách chia segment. Trong WinCC, archive backup là bản sao của segment đã đóng, được chép sang thư mục backup sau khi segment đóng; bản sao không nằm trong vòng xoay của archive Runtime nên không bị xóa khi segment cũ nhất bị loại. Các segment theo cấu hình cũ được đưa về cùng thư mục này, nên toàn bộ lịch sử nằm ở một chỗ và Runtime không phải mang theo.`,
+          `Đường lấy lại là thư mục {{CommonArchiving}} trong thư mục project. Khi Runtime đang chạy, cặp file MDF và LDF của một segment đặt vào đây sẽ được WinCC tự liên kết, và dữ liệu xem được như dữ liệu đang lưu. Điểm cần lưu ý: phải đưa từng segment một. Nếu chép cả loạt file vào cùng lúc, các segment sẽ không được liên kết.`,
+          `Chuyển tay vài chục cặp file, mỗi lần một cặp, là chỗ dễ sai: thiếu file LDF, chép nhầm hai segment cùng lúc, hoặc không biết segment trước đã liên kết xong chưa. Chúng tôi viết script lấy các segment thuộc khoảng thời gian cần tra cứu trong thư mục Backup, kiểm tra đủ cặp MDF và LDF, rồi chuyển lần lượt từng cặp vào CommonArchiving.`
+        ]
+      },
+      {
         heading: "Bàn giao",
         paragraphs: [
           `Chương trình điều khiển trên PLC M580 cho các phân đoạn chuyển đổi, duy trì kết nối ổn định với hệ WinCC hiện hữu.`,
           `Cấu hình MAST task của M580 hiệu chỉnh theo thời gian thực thi đo được: chế độ Periodic, chu kỳ 25 ms.`,
           `Quy trình thay thế thiết bị chi tiết theo cửa sổ dừng máy, gồm bước kiểm tra tương thích và phương án hoàn trả cấu hình an toàn.`,
           `Dự án WinCC V7.5 SP2 sau nâng cấp cùng bộ cấu hình chuẩn hóa áp dụng đồng bộ cho các trạm vận hành.`,
-          `Cấu hình lưu trữ mới cho Tag Logging Fast và Slow: giữ dữ liệu 3 năm, tối đa 110 GB, mỗi segment 3 tuần.`
+          `Cấu hình lưu trữ mới cho Tag Logging Fast và Slow: giữ dữ liệu 3 năm, tối đa 110 GB, mỗi segment 3 tuần.`,
+          `Thư mục Backup chứa toàn bộ segment đã đóng, gồm cả hơn 2.000 segment theo cấu hình cũ, cùng script chuyển lần lượt từng cặp MDF/LDF vào CommonArchiving khi cần tra cứu.`
         ]
       },
       {
