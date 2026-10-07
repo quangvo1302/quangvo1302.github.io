@@ -329,13 +329,41 @@ export const projects: readonly CaseStudy[] = [
         ]
       },
       {
+        heading: "Dữ liệu cũ cất đúng chỗ, dữ liệu mới ghi đúng giờ",
+        paragraphs: [
+          `Cấu hình mới chỉ quyết định cách dữ liệu được lưu từ đó về sau. Hơn 2.000 segment tích lũy theo cấu hình cũ là dữ liệu audit, không thể xóa, nhưng để nguyên thì Runtime lại phải mang chúng theo. Cấu hình mới đã bật backup với một thư mục sao lưu riêng, nên chúng tôi copy toàn bộ segment cũ từ dự án cũ vào chính thư mục đó. Từ đây, thư mục làm việc của Runtime chỉ còn khoảng 104 segment theo cấu hình mới; thư mục backup giữ hơn 2.000 segment cũ cùng các segment WinCC tự đẩy ra sau này.`,
+          `Dữ liệu audit chỉ có giá trị nếu lấy ra được khi cần. WinCC cho phép chép cặp file MDF/LDF của một segment vào thư mục {{CommonArchiving}} của project để Runtime tự liên kết và hiển thị dữ liệu theo đúng mốc thời gian trên trend và bảng. Để người vận hành không phải tự tìm file, tôi viết C-script trên WinCC: bấm nút, chọn khoảng thời gian trên popup. Import cắt các segment trong khoảng đó từ thư mục backup sang CommonArchiving; Move trả chúng về kho sau khi đối soát xong. Script cắt và dán chứ không sao chép, nên mỗi segment chỉ có một bản. Bước Move quan trọng không kém, vì càng nhiều archive được liên kết thì mở trend và bảng dữ liệu càng chậm.`,
+          `Trong log gửi Siemens khi hỏi về thời gian khởi động, kỹ sư của hãng còn chỉ ra một dòng lặp lại thường xuyên: "CCWriteArchiveServer — WinCC Process Archiving has stopped". Dòng này không hiện trên giao diện SCADA, chỉ nằm trong log chẩn đoán. Kết luận của hãng: lỗi chỉ xuất hiện khi dữ liệu gửi vào archive mang dấu thời gian không khớp với giờ hiện tại của server. Theo giao thức OPC, dấu thời gian không được phép thay đổi, nên mọi thành phần gửi dữ liệu vào WinCC phải cùng giờ với server.`,
+          `Chúng tôi cấu hình máy WinCC Server làm NTP server và trỏ đồng bộ thời gian của các máy WinCC Client về máy này. OPC server (Kepware) chạy ngay trên máy Server nên vốn dùng chung đồng hồ; đồng hồ đo điện năng đọc qua Modbus RTU không đồng bộ giờ được, và hãng thống nhất loại nó khỏi phạm vi đồng bộ vì nó chỉ cấp giá trị qua cổng nối tiếp. Sau khi Server và các Client cùng lấy giờ từ một nguồn, dòng thông báo dừng ghi archive không còn xuất hiện trong log.`
+        ],
+        figures: [
+          {
+            afterParagraph: 1,
+            src: "/images/ics-upgrade-wincc-migration/segment-cu-kho-backup-commonarchiving.webp",
+            alt: "Sơ đồ luồng segment: dự án cũ với hơn 2.000 segment được copy một lần vào thư mục Backup; thư mục Runtime giữ khoảng 104 segment theo cấu hình mới, WinCC tự đẩy segment sang Backup; C-script Import cắt segment theo khoảng thời gian từ Backup sang CommonArchiving để Runtime tự liên kết, Move trả về kho. Cắt và dán, không sao chép, mỗi segment chỉ có một bản.",
+            caption: "Segment cũ nằm trong kho, cần thì gọi lên qua CommonArchiving, xem xong trả về. Bấm vào hình để xem kích thước đầy đủ.",
+            width: 1920,
+            height: 1080
+          },
+          {
+            afterParagraph: 3,
+            src: "/images/ics-upgrade-wincc-migration/dong-bo-gio-server-client-ntp.webp",
+            alt: "Triệu chứng CCWriteArchiveServer — WinCC Process Archiving has stopped chỉ có trong log chẩn đoán; Siemens kết luận lỗi do dấu thời gian không khớp giờ server, OPC không cho đổi dấu thời gian. Sơ đồ: WinCC Server làm NTP server, có Kepware chạy cùng máy, các Client lấy giờ từ Server; đồng hồ đo điện năng Modbus RTU được loại khỏi phạm vi đồng bộ.",
+            caption: "Mọi máy gửi dữ liệu vào archive phải cùng một giờ: WinCC Server làm NTP server cho các Client.",
+            width: 1920,
+            height: 1080
+          }
+        ]
+      },
+      {
         heading: "Bàn giao",
         paragraphs: [
           `Chương trình điều khiển trên PLC M580 cho các phân đoạn chuyển đổi, duy trì kết nối ổn định với hệ WinCC hiện hữu.`,
           `Cấu hình MAST task của M580 hiệu chỉnh theo thời gian thực thi đo được: chế độ Periodic, chu kỳ 25 ms.`,
           `Quy trình thay thế thiết bị chi tiết theo cửa sổ dừng máy, gồm bước kiểm tra tương thích và phương án hoàn trả cấu hình an toàn.`,
           `Dự án WinCC V7.5 SP2 sau nâng cấp cùng bộ cấu hình chuẩn hóa áp dụng đồng bộ cho các trạm vận hành.`,
-          `Cấu hình lưu trữ mới cho Tag Logging Fast và Slow: giữ dữ liệu 3 năm, tối đa 110 GB, mỗi segment 3 tuần.`
+          `Cấu hình lưu trữ mới cho Tag Logging Fast và Slow: giữ dữ liệu 3 năm, tối đa 110 GB, mỗi segment 3 tuần.`,
+          `C-script Import/Move trên WinCC để gọi segment cũ từ thư mục backup lên CommonArchiving theo khoảng thời gian và trả về sau khi xem; máy WinCC Server cấu hình làm NTP server cho các Client.`
         ]
       },
       {
@@ -344,6 +372,7 @@ export const projects: readonly CaseStudy[] = [
           `Tầng điều khiển vận hành ổn định trên nền tảng M580, đảm bảo nguồn vật tư thay thế sẵn có từ hãng.`,
           `Sau khi hiệu chỉnh chu kỳ Periodic, thời gian phản hồi thao tác trên SCADA giảm từ 10–11 giây xuống còn khoảng 1–2 giây.`,
           `Sau khi đổi cách chia segment, thời gian khởi động và dừng WinCC Runtime giảm từ 30–40 phút xuống khoảng 10 phút, đo trên hệ thống đã chạy một năm với cấu hình mới.`,
+          `Hơn 2.000 segment cũ được giữ lại cho audit mà Runtime không phải liên kết; sau khi Server và Client cùng lấy giờ từ một nguồn, thông báo dừng ghi archive không còn xuất hiện trong log.`,
           `Ở lớp giám sát, các trạm vận hành dùng chung một cấu hình chuẩn hóa giúp cải thiện tốc độ và chất lượng điều khiển.`,
           `Tôi tham gia dự án với vai trò kỹ sư lập trình ở giai đoạn đầu và phụ trách vị trí trưởng nhóm lập trình trong các giai đoạn tiếp theo.`,
           `Điều tôi giữ lại từ dự án: khi một hệ thống vận hành chậm, nguyên nhân không nhất thiết là một vấn đề lớn. Nó có thể là một thông số nhỏ đang lệch nhịp với phần còn lại, và chỉ lộ ra khi nhìn cả chuỗi từ SCADA đến PLC thay vì từng phía riêng lẻ. Ở giai đoạn WinCC, đó lại là những thông số lưu trữ hợp lý khi đứng riêng nhưng nhân lên thành gánh nặng sau vài năm vận hành, nên khi cấu hình lưu trữ cần tính trước hệ thống sẽ phải mang theo bao nhiêu segment.`
